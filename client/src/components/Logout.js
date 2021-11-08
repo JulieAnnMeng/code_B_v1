@@ -1,11 +1,11 @@
-import React, {useState} from 'react'
-import { Link } from 'react-router-dom'
+import React from 'react'
+// import { Link } from 'react-router-dom'
 
 
 function Logout({logOut}) {
 
     return (
-        <h1>Logout</h1>
+        <h1>Plase click 'Logout' in the navigation bar</h1>
     )
 }
 

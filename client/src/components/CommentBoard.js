@@ -1,10 +1,11 @@
 import React from 'react'
-// import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
-function CommentBoard({comment, commentor}) {
+function CommentBoard({id, comment, commentor}) {
 
     return (
-        <div className="card">
+        <div className="card container">
+            &nbsp;
             <p>{comment}</p>
             <p>🙂 {commentor}</p>
         </div>

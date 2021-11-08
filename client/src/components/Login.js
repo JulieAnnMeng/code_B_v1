@@ -3,36 +3,71 @@ import { Link } from 'react-router-dom'
 
 
 function Login({logIn}) {
+    const blankFormData = {username: "", password: ""}
+    const [formData, setFormData] = useState(blankFormData);    
+
+    function handleChange(e){
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    }
+
+    function handleSubmit(e) {
+        e.preventDefault();
+        console.log(formData)
+        logIn(formData);
+        setFormData(blankFormData)
+    }
 
     return (
         <div className='container'>
-            &nbsp; 
             <h1 className='form-title'>Login</h1>
-            &nbsp; &nbsp; &nbsp;
+            &nbsp;
             <div className='container login-outside'>
                 <div className='container login-inside'>
-                    <form className='container login-form'>
+                    &nbsp;
+                    <form className='container login-form' onSubmit={handleSubmit}>
                         <div className='fields'>
                             <div className="row g-3 align-items-center">
                                 <div className="col-auto">
-                                    <label for="username" className="col-form-label login-label"><span>Username</span></label>
+                                    <label className="col-form-label login-label"><span>Username</span></label>
                                 </div>
-                                <div class="col-auto">
-                                    <input type="username" id="username-login" className="form-control input" size="50" aria-describedby="usernameHelpInline" />
+                                <div className="col-auto">
+                                    <input 
+                                        id="username-login" 
+                                        className="form-control input"
+                                        size="50" 
+                                        aria-describedby="usernameHelpInline" 
+                                        placeholder="Username"
+                                        name="username" 
+                                        value={formData.username}
+                                        onChange={handleChange}
+                                    />
                                 </div>
                             </div>
                             &nbsp; &nbsp;
                             <div className="row g-3 align-items-center">
                                 <div className="col-auto">
-                                    <label for="password" className="col-form-label login-label"><span> Password  </span></label>
+                                    <label className="col-form-label login-label"><span> Password  </span></label>
                                 </div>
-                                <div class="col-auto ">
-                                    <input type="password" id="password-login" className="form-control input" size="50" aria-describedby="passwordHelpInline" />
+                                <div className="col-auto ">
+                                    <input 
+                                        id="password-login"
+                                        className="form-control input"
+                                        size="50"
+                                        aria-describedby="passwordHelpInline"
+                                        placeholder="Password"
+                                        type="password"
+                                        name="password"
+                                        value={formData.password}    
+                                        onChange={handleChange}
+                                    />
                                 </div>
                             </div>
                         </div>
-                        <div class="submit">
-                            <button type="submit" className="btn btn-primary center bttn">Login</button>
+                        &nbsp;
+                        <div className="submit d-grid gap-2 d-md-block">
+                            <button type="submit" className="btn btn-primary bttn">Login</button>
+                            &nbsp; &nbsp;
+                            <Link to="/signup" className="btn btn-primary bttn"><p className="signup-link">Signup</p></Link>
                         </div>
                     </form>
                 </div>

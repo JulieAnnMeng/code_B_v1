@@ -1,7 +1,8 @@
 import React from 'react';
 // import banner from '../Banner.jpg';
 
-function Navbar() {
+function Navbar({user, logOut}) {
+    console.log(user)
 
     return (
         <div>
@@ -11,17 +12,23 @@ function Navbar() {
                     {/* Navbar Home link */}
                     <a className="navbar-brand" id="Navbar-title" href="/">Code <span>B</span></a>
                     <form className="d-flex">
-                        <input className="form-control me-2 bttn" id="search" type="search" placeholder="Search code_B" aria-label="Search" />
+                        <input className="form-control me-2 bttn" id="search" type="search" placeholder="🔍 Search code_B" aria-label="Search" />
                         <button className="btn btn-outline-success bttn" type="submit">Search</button>
                     </form>
                     {/* Navbar right links */}
                     <ul className="nav justify-content-end nav-pills" >
                         <li className="bttn">
-                            <a className="btn btn-outline-success bttn" href="/Login" id="login-bttn">Login</a>
+                            {user ? 
+                            <button className="btn btn-outline-success bttn" onClick={logOut} >Logout</button>
+                            :
+                            <a className="btn btn-outline-success bttn" href="/Login" id="navBar-bttn">Login</a>}
                         </li>
-                        &nbsp; &nbsp; &nbsp;
+                        &nbsp; &nbsp;
                         <li className="bttn">
-                            <a className="btn btn-outline-success bttn" href="/Signup" id="signup-bttn" >Signup</a>
+                            {user ? 
+                            <a className="btn btn-outline-success bttn" href="/ProfilePage" id="navBar-bttn" >👤</a>
+                            :
+                            <a className="btn btn-outline-success bttn" href="/Signup" id="navBar-bttn" >Signup</a>}
                         </li>
                     </ul>
                 </div>    

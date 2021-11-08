@@ -1,55 +1,108 @@
 import React, {useState} from 'react'
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 
 
-function Signup() {
+function Signup({signUp}) {
+    const blankFormData = {first_name: "", last_name: "", username: "", password: "", password_confirmation: ""}
+    const [formData, setFormData] = useState(blankFormData);    
+
+    function handleChange(e){
+        console.log(formData)
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    }
+
+    function handleSubmit(e) {
+        e.preventDefault();
+        console.log(formData)
+        signUp(formData);
+        setFormData(blankFormData)
+    }
 
     return (
         <div className='container'>
-        &nbsp; 
         <h1 className='form-title'>Signup</h1>
-        &nbsp; &nbsp; &nbsp;
+        &nbsp;
         <div className='container signup-outside'>
             <div className='container signup-inside'>
                 <h1 className='form-type-title'>Personal Information: </h1>
                 &nbsp;
-                <form className='container signup-form right'>
+                <form className='container signup-form right' onSubmit={handleSubmit}>
                     <div className="row mb-3">
-                        <label for="firstname" className="col-sm-2 col-form-label signup-label signup-label"><span>Firstname</span></label>
+                        <label className="col-sm-2 col-form-label signup-label signup-label"><span>Firstname</span></label>
                         <div className="col-sm-10 signup-input">
-                            <input type="firstname" className="form-control input" id="firstname-signup" />
+                            <input 
+                                id="firstname-signup" 
+                                className="form-control input" 
+                                type="firstname" 
+                                placeholder="First name"
+                                name="first_name" 
+                                value={formData.first_name}
+                                onChange={handleChange}
+                            />
                         </div>
                     </div>
                     &nbsp;
                     <div className="row mb-3">
-                        <label for="lastname" className="col-sm-2 col-form-label signup-label"><span>Lastname</span></label>
+                        <label className="col-sm-2 col-form-label signup-label"><span>Lastname</span></label>
                         <div className="col-sm-10 signup-input">
-                            <input type="lastname" className="form-control input" id="lastname-signup" />
+                            <input 
+                                id="lastname-signup"
+                                type="lastname" 
+                                className="form-control input" 
+                                placeholder="Last name"
+                                name="last_name" 
+                                value={formData.last_name}
+                                onChange={handleChange}
+                            />
                         </div>
                     </div>
                     &nbsp; 
                     <div className="row mb-3">
-                        <label for="username" className="col-sm-2 col-form-label signup-label"><span>Username</span></label>
+                        <label className="col-sm-2 col-form-label signup-label"><span>Username</span></label>
                         <div className="col-sm-10 signup-input">
-                            <input type="username" className="form-control input" id="username-signup" />
+                            <input 
+                                id="username-signup"
+                                type="username" 
+                                className="form-control input" 
+                                placeholder="username"
+                                name="username" 
+                                value={formData.username}
+                                onChange={handleChange}
+                            />
                         </div>
                     </div>
                     &nbsp;
                     <div className="row mb-3">
-                        <label for="password" className="col-sm-2 col-form-label signup-label"><span>Password</span></label>
+                        <label className="col-sm-2 col-form-label signup-label"><span>Password</span></label>
                         <div className="col-sm-10 signup-input">
-                            <input type="password" className="form-control input" id="password-signup" />
+                            <input 
+                                id="password-signup" 
+                                type="password" 
+                                className="form-control input" 
+                                placeholder="password"
+                                name="password" 
+                                value={formData.password}
+                                onChange={handleChange}
+                            />
                         </div>
                     </div>
                     &nbsp;
                     <div className="row mb-3">
-                        <label for="password-confirmation" className="col-sm-2 col-form-label signup-label"><span>Password Confirmation</span></label>
+                        <label className="col-sm-2 col-form-label signup-label"><span>Password Confirmation</span></label>
                         <div className="col-sm-10 signup-input">
-                            <input type="password-confirmation" className="form-control input" id="password-confirmation-signup" />
+                            <input 
+                                id="password-confirmation-signup" 
+                                type="password-confirmation" 
+                                className="form-control input" 
+                                placeholder="Password confirmation" 
+                                name="password_confirmation" 
+                                value={formData.password_confirmation}
+                                onChange={handleChange}
+                            />
                         </div>
                     </div>
                     <div className="submit">
-                        <button type="submit" className="btn btn-primary center bttn">Login</button>
+                        <button type="submit" className="btn btn-primary center bttn">Signup</button>
                     </div>
                 </form>
             </div>

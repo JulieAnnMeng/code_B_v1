@@ -3,5 +3,4 @@ class InterestSerializer < ActiveModel::Serializer
   has_one :user
   has_one :discussion
 
-
 end

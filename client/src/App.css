@@ -49,7 +49,7 @@ span {
   border: 1px solid #0C1224;
 }
 
-#login-bttn, #signup-bttn {
+#navBar-bttn {
   padding-top: 26px;
 }
 
@@ -161,7 +161,7 @@ span {
 
 .signup-inside {
   width: 1035px;
-  height: 700px;
+  height: 725px;
   left: 197px;
   top: 450px;
   margin-top: 20px;
@@ -209,13 +209,37 @@ div.col-sm-10.signup-input {
 }
 
 .submit {
-  padding: 0px 86px 5px 40px;
+  padding: 0px 0px 0px 270px;
 }
 
+.signup-link {
+  padding-top: 20px;
+}
 
-/* 
-.fields {
-  align-items: right;
-  flex-wrap: wrap;
-  justify-content: space-between;
-} */
+.form-type-title {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 48px;
+  line-height: 25px;
+
+  text-decoration-line: underline;
+
+  color: #1B4756;
+}
+
+.info-alert {
+  height: 100px;
+
+  border: 1px solid #1B4756;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 25px;
+
+  color: #1B4756;
+}
