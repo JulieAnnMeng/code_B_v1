@@ -11,6 +11,7 @@ import UserPage from "./components/UserPage";
 import DiscussionCard from "./components/DiscussionCard";
 import Discussion from "./components/Discussion";
 import CommentForm from "./components/CommentForm";
+import DiscussionForm from './components/DiscussionForm';
 // import Footer from "./components/Footer";
 
 function App() {
@@ -44,7 +45,6 @@ function App() {
           if (err.errors[0] === 'Not authorized'){
             setUser(null)
           } else {
-            debugger
           console.log(err.errors)
           }})
       }})
@@ -127,27 +127,34 @@ function App() {
     .catch(error => console.log("Log in incorrect: ", error))
   }
 
+  function startDiscussion(data) {
+    fetch('/discussions',{
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+        },
+      body: JSON.stringify(data)
+    })
+    .then((r) => r.json())
+    .then(discussion => navigate (`/Discussion/${discussion.id}`))
+    .catch(error => console.log("Log in incorrect: ", error))
+  }
+
   return (
     <div className="App">
       <Navbar user={user} logOut={logOut}/>
       
       <Routes>
         <div>
-          {/* <Route exact path="/Login">
-            
-          </Route> */}
-          {/* <Route exact path="/signup">
-            <Signup />
-          </Route> */}
           <Route exact path="/" element={board ? <Home board={board} user={user} /> : <div className="spinner-border text-info center container" role="status"><span className="visually-hidden">Loading...</span></div> } />
             <Route exact path={user ? "/Logout": "/Login"} element={user ? <Logout /> : <Login logIn={logIn} />} />
             <Route exact path={user ? "/ProfilePage" : "/Signup"} element={user? <ProfilePage user={user}/> : <Signup signUp={signUp} />} />
+            <Route exact path={"/Discussion"} element={<Discussion user={user} />} />
             <Route exact path={"/DiscussionCard"} element={<DiscussionCard logOn={user} />} />
             <Route exact path={"/Discussion/:id"} element={<Discussion user={user} />} />
-            <Route exact path={"/UserPage"} element={<UserPage user={user} />} />
+            <Route exact path={"/UserPage"} element={<UserPage user={user} getUser={getUser} />} />
             <Route exact path={"/CommentForm/:id"} element={<CommentForm user={user} addComment={addComment} />} />
-            
-          {/* </Route> */}
+            <Route exact path={"/DiscussionForm"} element={<DiscussionForm user={user} startDiscussion={startDiscussion}/>} />
         </div>
       </Routes>
       

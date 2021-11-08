@@ -16,17 +16,6 @@ class UsersController < ApplicationController
         render json: user, status: :ok
     end
 
-    def page
-        user = User.find_by(username: user_params[:username])
-        id = user.id
-        userInterests = Interest.find_by(user_id: id)
-        userDiscussions = Discussion.find_by(user_id: id)
-        userComments = Comment.find_by(user_id: id)
-        userPage = {interest: userInterests, discussion: userDiscussions, comments: userComments}
-        byebug
-        render json: userPage, serializer: UserSerializer.userPage
-    end
-
     def update
         user = User.find_by(username: params[:id])
         if user.update(user_params)

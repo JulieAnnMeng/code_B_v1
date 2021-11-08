@@ -13,7 +13,7 @@ class DiscussionsController < ApplicationController
     def create
         discussion = Discussion.new(discussion_params)
         if discussion.save
-            render json: selection, status: :created
+            render json: discussion, status: :created
         else
             render json: {errors: discussion.errors}, status: :unauthorized
         end
@@ -22,7 +22,7 @@ class DiscussionsController < ApplicationController
     def update
         discussion = Discussion.find(params[:id])
         if discussion.update(discussion_params)
-            render json: selection, status: :created
+            render json: discussion, status: :created
         else
             render json: {errors: discussion.errors}, status: :unauthorized
         end

@@ -9,7 +9,7 @@ function Home({board, user}) {
     } else {
         welcome = null;
     }
-    
+
     let discussion = board.map(entry => {
         return (
             <Board 
@@ -17,6 +17,7 @@ function Home({board, user}) {
                 id={entry.id}
                 topic={entry.topic}
                 discussion={entry.discussion}
+                logOn={user}
                 user={entry.user.username}
                 comments={entry.comments}
                 interests={entry.interests}

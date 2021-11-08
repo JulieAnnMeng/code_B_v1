@@ -6,6 +6,7 @@ frank = User.create(first_name: 'Frank', last_name: 'Sinatra', username: 'FSinat
 puts "seeding Discussions... 🌱"
 topic1 = Discussion.create(user: julie, topic: "Environment Setup", discussion: "Found a great template for Rails backend and react frontend. Check out this repository: https://github.com/learn-co-curriculum/project-template-react-rails-api")
 topic2 = Discussion.create(user: bob, topic: "Online lessons", discussion: "Best site for online coding lessons")
+topic3 = Discussion.create(user: bob, topic: "CSS", discussion: "Found a great site for CSS color palettes: https://color.adobe.com/ check it out!")
 
 puts "seeding Comments... 🌱"
 comment1 = Comment.create(user: bob, discussion: topic1, comment: "Awesome! Thanks for sharing")

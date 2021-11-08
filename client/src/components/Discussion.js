@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import CommentBoard from './CommentBoard'
-import CommentForm from './CommentForm'
 
 
-function DiscussionCard({user}) {
+function Discussion({user}) {
     let welcome;
     let commentAvailable;
     let commentAlert = "Login or signup to participate";
@@ -21,10 +20,8 @@ function DiscussionCard({user}) {
         fetch(`/discussions/${id}`)
         .then((response) => response.json())
         .then((data) => {
-            // debugger;
             setDiscussion(data)
-            window.scrollTo(0, 0)
-            
+            window.scrollTo(0, 0)        
         })
         .catch((error) => console.log(error))
     }
@@ -81,7 +78,7 @@ function DiscussionCard({user}) {
                             <div className="d-grid gap-2 d-md-block">
                                 <Link to={`/Login`} className="btn btn-primary bttn2">☆ <span className="badge bg-secondary">{discussion.interests.length}</span> Interests</Link>
                                 &nbsp; &nbsp;
-                                <Link to={user? `/CommentForm/${id}` : `/Login`} className="btn btn-primary bttn2"><span className="badge bg-secondary">{discussion.comments.length}</span> Comments</Link>
+                                <Link to={user ? `/CommentForm/${id}` : `/Login`} className="btn btn-primary bttn2"><span className="badge bg-secondary">{discussion.comments.length}</span> Comments</Link>
                             </div>
                             &nbsp;
                         </div>
@@ -121,4 +118,4 @@ function DiscussionCard({user}) {
     )
 }
 
-export default DiscussionCard
+export default Discussion

@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   get "/discussions", to: "discussions#index"
   get "/discussions/:id", to: "discussions#show"
   post "/comments", to: "comments#create"
-  get "/userpage/:id", to: "users#page"
+  post "/discussions", to: "discussions#create"
   get "/users/:id", to: "users#show"
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 

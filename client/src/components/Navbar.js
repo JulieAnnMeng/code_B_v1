@@ -2,7 +2,6 @@ import React from 'react';
 // import banner from '../Banner.jpg';
 
 function Navbar({user, logOut}) {
-    console.log(user)
 
     return (
         <div>
