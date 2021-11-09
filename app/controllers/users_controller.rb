@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-    skip_before_action :authorize, only: :create
+    skip_before_action :authorize, only: [:create, :update]
 
     def create
         user = User.create(user_params)
@@ -17,11 +17,23 @@ class UsersController < ApplicationController
     end
 
     def update
-        user = User.find_by(username: params[:id])
-        if user.update(user_params)
-            render json: user, status: :created
-        else
-            rende json: {errors: user.errors}, status: :unauthorized
+        byebug
+        user = User.find(params[:id])
+        if user&.authenticate(params[:password])
+            byebug
+            if params[:new_password]
+                if user.update(password: params[:new_password])
+                    render json: user, status: :created
+                else
+                    render json: {errors: user.errors}, status: :unauthorized
+                end
+            else
+                if user.update(user_params)
+                    render json: user, status: :created
+                else
+                    render json: {errors: user.errors}, status: :unauthorized
+                end
+            end
         end
     end
 
@@ -33,6 +45,6 @@ class UsersController < ApplicationController
 
     private
     def user_params
-        params.permit(:id, :user, :first_name, :last_name, :username, :password, :password_confirmation)
+        params.permit(:id, :user, :first_name, :last_name, :username, :password, :password_confirmation, :new_password, :new_password_confirmation)
     end
 end

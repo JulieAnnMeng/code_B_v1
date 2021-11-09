@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   post "/comments", to: "comments#create"
   post "/discussions", to: "discussions#create"
   get "/users/:id", to: "users#show"
+  patch "/userEdit/:id", to: "users#update"
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
 end

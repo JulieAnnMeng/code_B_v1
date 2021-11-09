@@ -7,11 +7,13 @@ import Login from "./components/Login";
 import Logout from "./components/Logout";
 import Signup from "./components/Signup";
 import ProfilePage from "./components/ProfilePage";
+import ProfileEdit from './components/ProfileEdit';
 import UserPage from "./components/UserPage";
 import DiscussionCard from "./components/DiscussionCard";
 import Discussion from "./components/Discussion";
 import CommentForm from "./components/CommentForm";
 import DiscussionForm from './components/DiscussionForm';
+
 // import Footer from "./components/Footer";
 
 function App() {
@@ -140,6 +142,28 @@ function App() {
     .catch(error => console.log("Log in incorrect: ", error))
   }
 
+  function userEdit(id, data){
+    console.log(id, data)
+    debugger;
+    fetch(`/userEdit/${id}`,{
+      method: "PATCH",
+      headers: {
+        'Content-Type': 'application/json'
+        },
+      body: JSON.stringify(data)
+    })
+    .then((r) => {
+      if (r.ok) {
+        r.json();
+        }
+      else {
+        r.json().then((err) => console.log(err.errors));
+      }
+      navigate(`/ProfilePage`);
+    })
+    .catch(error => console.log("Log in incorrect: ", error))
+  }
+
   return (
     <div className="App">
       <Navbar user={user} logOut={logOut}/>
@@ -155,6 +179,7 @@ function App() {
             <Route exact path={"/UserPage"} element={<UserPage user={user} getUser={getUser} />} />
             <Route exact path={"/CommentForm/:id"} element={<CommentForm user={user} addComment={addComment} />} />
             <Route exact path={"/DiscussionForm"} element={<DiscussionForm user={user} startDiscussion={startDiscussion}/>} />
+            <Route exact path={"/ProfileEdit"} element={<ProfileEdit user={user} userEdit={userEdit} />} />
         </div>
       </Routes>
       

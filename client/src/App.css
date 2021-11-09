@@ -203,13 +203,13 @@ span {
 }
 
 div.col-sm-10.signup-input {
-  /* padding-left: 25px; */
+  padding-left: 25px;
   width: 550px;
 }
 .input {
   height: 60px;
   border-radius: 15px;
-  width: 500px;
+  width: 550px;
 }
 
 .right {
@@ -251,6 +251,59 @@ div.col-sm-10.signup-input {
 
   color: #1B4756;
 }
+
+.edit-btn  {
+  padding-right: 15px;
+  padding-left: 15px;
+  padding-top: 25px;
+  
+
+  font-family: 'Quantico', sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 25px;
+}
+
+.edit-outside {
+  width: 1250px;
+  height: 1000px;
+  top: 50px;
+  margin-top: 25px;
+  padding-top: 50px;
+
+  background: #CDE1E1;
+  border-radius: 20px;
+}
+
+.edit-inside {
+  width: 1050px;
+  height: 875px;
+  top: 450px;
+  margin-top: 20px;
+  padding: 25px 15px 25px 25px;
+
+  background: rgba(166, 173, 173, 0.35);
+  border-radius: 15px;
+}
+
+.edit-label {
+  font-family: 'Quantico', sans-serif;
+  width: 380px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 26px;
+  line-height: 25px;
+  text-align: left;
+
+  color: #1B4756;
+}
+
+.edit-bttn {
+  padding-right: 350px;
+  /* padding-left: 310px; */
+}
+
 
 /* -----------------------------End of Meyer Reset--------------------------------- */
 
