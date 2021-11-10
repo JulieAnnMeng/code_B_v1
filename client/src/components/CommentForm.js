@@ -1,34 +1,27 @@
-import React, { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import React, { useState } from 'react';
+import { useParams } from 'react-router-dom';
 
 
-function CommentForm({user, addComment}) {
-    const blankFormData = {user_id: user.id, discussion_id: "", comment: ""}
-    const [formData, setFormData] = useState(blankFormData);   
-    const [discussion, setDiscussion] = useState(null) 
-    const { id } = useParams();
+function CommentForm({user, addComment, editUserComment, board}) {
+    const { discussion_id, id } = useParams();
 
-    useEffect(() => {
-        getDiscussion()
-    }, []);
+    let commentFormData;
 
-    function getDiscussion() {
-        fetch(`/discussions/${id}`)
-        .then((response) => response.json())
-        .then((data) => {
-            // debugger;
-            setDiscussion(data)
-            setFormData({ ...formData, discussion_id: data.id });
-            window.scrollTo(0, 0)
-        })
-        .catch((error) => console.log(error))
-    }
+    discussion_id ? commentFormData = (board.find(dis => dis.id === parseInt(discussion_id)).comments.find(comment => comment.id === parseInt(id))) 
+        : commentFormData = {user_id: user.id, discussion_id: id, comment: ""}
 
+    const [formData, setFormData] = useState(commentFormData);   
+    const discussion = {topic: board.find(dis => dis.id === parseInt(id)).topic, discussion: board.find(dis => dis.id === parseInt(id)).discussion}
+    
     function handleSubmit (e) {
         e.preventDefault();
-        console.log(formData)
-        addComment(formData);
-        setFormData(blankFormData)
+        if(discussion_id){
+            editUserComment(formData);
+            setFormData({user_id: user.id, discussion_id: id, comment: ""});
+        } else {
+            addComment(formData);
+            setFormData({user_id: user.id, discussion_id: id, comment: ""});
+        }
     }
 
     function handleChange(e) {

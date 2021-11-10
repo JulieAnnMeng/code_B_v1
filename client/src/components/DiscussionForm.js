@@ -1,14 +1,29 @@
 import React, { useState } from 'react'
+import { useParams } from 'react-router-dom'
 
 
-function DiscussionForm({user, startDiscussion}) {
-    const blankFormData = {user_id: user.id, topic: "", discussion: ""}
-    const [formData, setFormData] = useState(blankFormData);   
+function DiscussionForm({user, startDiscussion, editUserDiscussion, board}) {
+    const { id } = useParams();
+    
+    let discussionFormData;
+    
+    id ? discussionFormData = board.find(dis => parseInt(dis.id) === parseInt(id)) 
+        :   discussionFormData = {user_id: user.id, topic: "", discussion: ""}
 
+    const [formData, setFormData] = useState(discussionFormData);   
+
+    console.log(discussionFormData)
+    console.log(board)
+    
     function handleSubmit (e) {
         e.preventDefault();
-        startDiscussion(formData);
-        setFormData(blankFormData)
+        if(id){
+            editUserDiscussion(formData)
+            setFormData({user_id: user.id, topic: "", discussion: ""})
+        } else {
+            startDiscussion(formData);
+            setFormData({user_id: user.id, topic: "", discussion: ""})
+        }
     }
 
     function handleChange(e) {

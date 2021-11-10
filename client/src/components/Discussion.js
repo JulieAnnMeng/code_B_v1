@@ -1,26 +1,31 @@
 import React, { useState, useEffect } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useParams, useNavigate } from 'react-router-dom'
 import CommentBoard from './CommentBoard'
 
 
-function Discussion({user}) {
+function Discussion({user, addInterest}) {
+    const [discussion, setDiscussion] = useState(null)
+    const [interestCount, setInterestCount] = useState(null)
+    const [update, setUpdate] = useState(false);
+    const { id } = useParams();
+    const navigate = useNavigate();
     let welcome;
     let commentAvailable;
     let commentAlert = "Login or signup to participate";
     let tableHeader;
     let commentBoard;
-    const [discussion, setDiscussion] = useState(null)
-    const { id } = useParams();
 
     useEffect(() => {
         getDiscussion()
-    }, []);
+        setUpdate(false)
+    }, [update]);
 
     function getDiscussion() {
         fetch(`/discussions/${id}`)
         .then((response) => response.json())
         .then((data) => {
             setDiscussion(data)
+            setInterestCount(data.interests.length)
             window.scrollTo(0, 0)        
         })
         .catch((error) => console.log(error))
@@ -63,6 +68,19 @@ function Discussion({user}) {
         tableHeader = commentAlert
     };
 
+    function handleInterest(e) {
+        e.preventDefault();
+        if(user) {
+            setUpdate(true)
+            let user_id = user.id;
+        let discussion_id = id;
+            setInterestCount(interestCount + 1)
+            addInterest(user_id, discussion_id);
+        } else {
+            navigate('/Login')
+        }
+    }
+
         return (
              <div className="container">
                 {discussion ?  
@@ -76,7 +94,7 @@ function Discussion({user}) {
                             <p>🙂 {discussion.user.username}</p>  
                             &nbsp;  
                             <div className="d-grid gap-2 d-md-block">
-                                <Link to={`/Login`} className="btn btn-primary bttn2">☆ <span className="badge bg-secondary">{discussion.interests.length}</span> Interests</Link>
+                                <button className="btn btn-primary bttn2" onClick={handleInterest}>☆ <span className="badge bg-secondary">{interestCount}</span> Interests</button>
                                 &nbsp; &nbsp;
                                 <Link to={user ? `/CommentForm/${id}` : `/Login`} className="btn btn-primary bttn2"><span className="badge bg-secondary">{discussion.comments.length}</span> Comments</Link>
                             </div>

@@ -13,7 +13,7 @@ class InterestsController < ApplicationController
     def create
         interest = Interest.new(interest_params)
         if interest.save
-            render json: selection, status: :created
+            render json: interest, status: :created
         else
             render json: {errors: interest.errors}, status: :unauthorized
         end
@@ -22,7 +22,7 @@ class InterestsController < ApplicationController
     def update
         interest = Interest.find(params[:id])
         if interest.update(interest_params)
-            render json: selection, status: :created
+            render json: interest, status: :created
         else
             render json: {errors: interest.errors}, status: :unauthorized
         end

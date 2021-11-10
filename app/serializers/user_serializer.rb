@@ -17,8 +17,8 @@ class UserSerializer < ActiveModel::Serializer
     userDiscussions = object.discussions.map{|discussion| {id: discussion.id, topic: discussion.topic, discussion: discussion.discussion, discussion_date: discussion.created_at.strftime('%m-%d-%Y')}}
     
     
-    userComments = object.comments.map{|comment| {id: comment.id, discussion_topic: comment.discussion.topic, discussion: comment.discussion.discussion, comment: comment.comment, comment_date: comment.created_at.strftime('%m-%d-%Y')}}
-
+    userComments = object.comments.map {|comment| {id: comment.id, discussion_id: comment.discussion_id, discussion_topic: comment.discussion.topic, discussion: comment.discussion.discussion, comment: comment.comment, comment_date: comment.created_at.strftime('%m-%d-%Y')}}
+    
     userpage = {interests: userInterests, discussions: userDiscussions, userComments: userComments}
     
     return userpage

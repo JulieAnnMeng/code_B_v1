@@ -1,11 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import ProfileEdit from './ProfileEdit'
-
 
 function ProfilePage({user}) {
-    console.log(user)
-
 
     return (
         <div className="container card">

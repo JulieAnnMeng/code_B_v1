@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import Board from './Board'
 
-function Home({board, user}) {
+function Home({board, addInterest, user}) {
     let welcome;
     if (user) {
         welcome = <Link to='/UserPage' className='welcome'> 🙂 {user.first_name}</Link>
@@ -18,6 +18,7 @@ function Home({board, user}) {
                 topic={entry.topic}
                 discussion={entry.discussion}
                 logOn={user}
+                addInterest={addInterest}
                 user={entry.user.username}
                 comments={entry.comments}
                 interests={entry.interests}
@@ -32,7 +33,7 @@ function Home({board, user}) {
                     A forum for all coding discussions, where users can interact with each other and continue their education in programming.
                 </p><br/>
             </div>
-            <h2 className='board'>Discussion Board</h2>
+            <h2 className='board'>Discussion Board</h2><br/>
             &nbsp;
             {discussion}
             &nbsp; &nbsp;
