@@ -1,10 +1,16 @@
 import React, {useState} from 'react'
-// import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 
 function ProfileEdit({user, userEdit}) {
-    // const blankFormData = {""};
-    const [formData, setFormData] = useState("");    
+    const [formData, setFormData] = useState(""); 
+    
+    let welcome;
+    if (user) {
+        welcome = <Link to='/UserPage' className='welcome'> 🙂 {user.first_name}</Link>
+    } else {
+        welcome = null;
+    } 
 
     function handleChange(e){
         console.log(e.target.value)
@@ -20,6 +26,7 @@ function ProfileEdit({user, userEdit}) {
 
     return (
         <div className='container'><br />
+        <br /><br /><h1 className='welcome'> 🙂 Welcome {welcome}</h1><br /><br />
         <h1 className='form-title'>Profile Edits</h1>
         <div className='container card edit-outside'>
             <div className='container edit-inside'>

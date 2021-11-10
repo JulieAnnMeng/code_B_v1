@@ -17,10 +17,9 @@ class UsersController < ApplicationController
     end
 
     def update
-        byebug
         user = User.find(params[:id])
         if user&.authenticate(params[:password])
-            byebug
+            # byebug
             if params[:new_password]
                 if user.update(password: params[:new_password])
                     render json: user, status: :created

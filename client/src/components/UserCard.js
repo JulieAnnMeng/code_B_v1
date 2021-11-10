@@ -45,7 +45,7 @@ function UserCard({user, id, interest_id, discussion_id, type, topic, discussion
             :
                 <div className="card">
                     {/* <h1 className="title">{topic}</h1> */}
-                    <Link to={`/Discussion/${id}`} className="title" > {topic} </Link><br />
+                    <Link to={`/Discussion/${discussion_id}`} className="title" > {topic} </Link><br />
                     <p>{discussion}</p>
                     <div className="card container">
                         <p>{comment}</p>

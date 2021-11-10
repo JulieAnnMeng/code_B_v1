@@ -153,6 +153,7 @@ function App() {
       else {
         r.json().then((err) => console.log(err.errors));
       }
+      getUser();
       navigate(`/ProfilePage`);
     })
     .catch(error => console.log("Log in incorrect: ", error))
@@ -200,8 +201,6 @@ function App() {
   }
 
   function editUserComment(formData) {
-    console.log(formData);
-    debugger;
     fetch(`/comments/${formData.id}`,{
       method: "PATCH",
       headers: {
@@ -234,10 +233,10 @@ function App() {
             <Route exact path={"/DiscussionCard"} element={<DiscussionCard logOn={user} />} />
             <Route exact path={"/Discussion/:id"} element={<Discussion user={user} addInterest={addInterest} />} />
             <Route exact path={"/UserPage"} element={<UserPage user={user} getUser={getUser} />} />
-            <Route exact path={"/CommentForm/:id"} element={<CommentForm user={user} board={board} addComment={addComment} />} />
+            <Route exact path={"/CommentForm/:id"} element={<CommentForm user={user} board={board} getDiscussions={getDiscussions} addComment={addComment} />} />
             <Route exact path={"/DiscussionForm"} element={<DiscussionForm user={user} startDiscussion={startDiscussion}/>} />
             <Route exact path={"/DiscussionForm/:id"} element={<DiscussionForm user={user} board={board} editUserDiscussion={editUserDiscussion} />} />
-            <Route exact path={"/Discussion/:discussion_id/CommentForm/:id/"} element={<CommentForm user={user} board={board} editUserComment={editUserComment} />} />
+            <Route exact path={"/Discussion/:discussion_id/CommentForm/:id/"} element={<CommentForm user={user} getDiscussions={getDiscussions} board={board} editUserComment={editUserComment} />} />
             <Route exact path={"/ProfileEdit"} element={<ProfileEdit user={user} userEdit={userEdit} />} />
         </div>
       </Routes>

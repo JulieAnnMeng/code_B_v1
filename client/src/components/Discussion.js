@@ -8,7 +8,9 @@ function Discussion({user, addInterest}) {
     const [interestCount, setInterestCount] = useState(null)
     const [update, setUpdate] = useState(false);
     const { id } = useParams();
+
     const navigate = useNavigate();
+
     let welcome;
     let commentAvailable;
     let commentAlert = "Login or signup to participate";

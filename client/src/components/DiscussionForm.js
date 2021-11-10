@@ -6,15 +6,13 @@ function DiscussionForm({user, startDiscussion, editUserDiscussion, board}) {
     const { id } = useParams();
     
     let discussionFormData;
-    
-    id ? discussionFormData = board.find(dis => parseInt(dis.id) === parseInt(id)) 
+
+    if(board){
+         id ? discussionFormData = board.find(dis => parseInt(dis.id) === parseInt(id)) 
         :   discussionFormData = {user_id: user.id, topic: "", discussion: ""}
-
+    }
     const [formData, setFormData] = useState(discussionFormData);   
-
-    console.log(discussionFormData)
-    console.log(board)
-    
+  
     function handleSubmit (e) {
         e.preventDefault();
         if(id){

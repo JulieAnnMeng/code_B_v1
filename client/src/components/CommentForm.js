@@ -2,16 +2,24 @@ import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 
-function CommentForm({user, addComment, editUserComment, board}) {
+function CommentForm({user, addComment, editUserComment, getDiscussions, board}) {
     const { discussion_id, id } = useParams();
-
+    getDiscussions();
     let commentFormData;
+    let discussion;
 
-    discussion_id ? commentFormData = (board.find(dis => dis.id === parseInt(discussion_id)).comments.find(comment => comment.id === parseInt(id))) 
-        : commentFormData = {user_id: user.id, discussion_id: id, comment: ""}
+    if(board) {
+        if(discussion_id) {
+            commentFormData = (board.find(dis => dis.id === parseInt(discussion_id)).comments.find(comment => comment.id === parseInt(id)));
+            discussion = {topic: board.find(dis => dis.id === parseInt(discussion_id)).topic, discussion: board.find(dis => dis.id === parseInt(discussion_id)).discussion} 
+        } else {
+            commentFormData = {user_id: user.id, discussion_id: id, comment: ""};
+            discussion = {topic: board.find(dis => dis.id === parseInt(id)).topic, discussion: board.find(dis => dis.id === parseInt(id)).discussion}
+        }
+    }
 
     const [formData, setFormData] = useState(commentFormData);   
-    const discussion = {topic: board.find(dis => dis.id === parseInt(id)).topic, discussion: board.find(dis => dis.id === parseInt(id)).discussion}
+    
     
     function handleSubmit (e) {
         e.preventDefault();
