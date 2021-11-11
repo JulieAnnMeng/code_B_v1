@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 
-function CommentForm({user, addComment, editUserComment, getDiscussions, board}) {
+function CommentForm({user, addComment, editUserComment, board}) {
     const { discussion_id, id } = useParams();
-    getDiscussions();
+
     let commentFormData;
     let discussion;
 

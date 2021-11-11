@@ -1,45 +1,25 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { Link, useParams, useNavigate } from 'react-router-dom'
 import CommentBoard from './CommentBoard'
 
 
-function Discussion({user, addInterest}) {
-    const [discussion, setDiscussion] = useState(null)
-    const [interestCount, setInterestCount] = useState(null)
-    const [update, setUpdate] = useState(false);
+function Discussion({user, addInterest, board}) {
     const { id } = useParams();
-
     const navigate = useNavigate();
 
-    let welcome;
     let commentAvailable;
     let commentAlert = "Login or signup to participate";
+    let discussion;
+    let interestCount;
+    let welcome;
     let tableHeader;
     let commentBoard;
+    let interestStar;
 
-    useEffect(() => {
-        getDiscussion()
-        setUpdate(false)
-    }, [update]);
-
-    function getDiscussion() {
-        fetch(`/discussions/${id}`)
-        .then((response) => response.json())
-        .then((data) => {
-            setDiscussion(data)
-            setInterestCount(data.interests.length)
-            window.scrollTo(0, 0)        
-        })
-        .catch((error) => console.log(error))
-    }
-
-    if (user) {
-        welcome = <Link to='/UserPage' className='welcome'> 🙂 {user.first_name}</Link>
-    } else {
-        welcome = null;
-    }
-    
-    if(discussion){
+    if(board){  
+        discussion = board.find(discussion => discussion.id === parseInt(id));
+        interestCount = discussion.interests.length;
+        commentAvailable = `${discussion.comments.length} comments below. Join the discussion!`;
         let comments; 
         if(discussion.comments){
             comments = discussion.comments;
@@ -54,34 +34,37 @@ function Discussion({user, addInterest}) {
                 />
             )})
         } else {
+            commentAvailable = 'No comments available';
             commentBoard = null;
         }
     }
-    
-    if (commentBoard) {
-        commentAvailable = `${discussion.comments.length} comments below. Join the discussion!`;
-    } else {
-        commentAvailable = 'No comments available';
-    }
-    
-    if(user) {
+
+    if (user) {
+        interestStar = user.userPage.interests.find(interest => interest.discussion_id === parseInt(id)) ? true : false;
+        console.log(interestStar)
+        welcome = <Link to='/UserPage' className='welcome'> 🙂 {user.first_name}</Link>
         tableHeader = commentAvailable
     } else {
+        welcome = null;
         tableHeader = commentAlert
-    };
+    }
 
     function handleInterest(e) {
         e.preventDefault();
         if(user) {
-            setUpdate(true)
-            let user_id = user.id;
-        let discussion_id = id;
-            setInterestCount(interestCount + 1)
-            addInterest(user_id, discussion_id);
+            let notAlreadyInterested = user.userPage.interests.find(interest => interest.discussion_id === parseInt(id)) ? false : true;
+            if (notAlreadyInterested){
+                let user_id = user.id;
+                let discussion_id = id;
+                addInterest(user_id, discussion_id);
+            } else {
+                console.log("Already interested")
+            }
         } else {
             navigate('/Login')
         }
     }
+
 
         return (
              <div className="container">
@@ -96,7 +79,7 @@ function Discussion({user, addInterest}) {
                             <p>🙂 {discussion.user.username}</p>  
                             &nbsp;  
                             <div className="d-grid gap-2 d-md-block">
-                                <button className="btn btn-primary bttn2" onClick={handleInterest}>☆ <span className="badge bg-secondary">{interestCount}</span> Interests</button>
+                                <button className="btn btn-primary bttn2" onClick={handleInterest}>{ interestStar ? " ★ " : " ☆ " }<span className="badge bg-secondary">{interestCount}</span> Interests</button>
                                 &nbsp; &nbsp;
                                 <Link to={user ? `/CommentForm/${id}` : `/Login`} className="btn btn-primary bttn2"><span className="badge bg-secondary">{discussion.comments.length}</span> Comments</Link>
                             </div>

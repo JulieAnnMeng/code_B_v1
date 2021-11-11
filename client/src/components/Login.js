@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import { Link } from 'react-router-dom'
 
 
-function Login({logIn}) {
+function Login({logIn, errors}) {
     const blankFormData = {username: "", password: ""}
     const [formData, setFormData] = useState(blankFormData);    
 
@@ -70,6 +70,10 @@ function Login({logIn}) {
                             <Link to="/signup" className="btn btn-primary bttn"><p className="signup-link">Signup</p></Link>
                         </div>
                     </form>
+                    {/* ask Chaim or Billy on how to do pop up error messages. Setup validations for all forms */}
+                    {/* {errors ? (
+                        <Message error header={errors} content="Please sign in again" />
+                    ) : null} */}
                 </div>
             </div>
         </div>

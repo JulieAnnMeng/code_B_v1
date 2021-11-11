@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import UserCard from './UserCard';
 
-function UserPage({user, setEdit, edit, getUser}) {
+function UserPage({user, getUser}) {
     const [update, setUpdate] = useState(false);
     
     let userInterests;
@@ -13,8 +13,8 @@ function UserPage({user, setEdit, edit, getUser}) {
     let comment;
 
     useEffect(() => {
-        getUser()
-        setUpdate(false)
+        getUser();
+        setUpdate(false);
     }, [update]);
 
     function deleteTypeSwitch(type, id) {

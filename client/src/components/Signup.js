@@ -92,7 +92,7 @@ function Signup({signUp}) {
                         <div className="col-sm-10 signup-input">
                             <input 
                                 id="password-confirmation-signup" 
-                                type="password-confirmation" 
+                                type="password" 
                                 className="form-control input" 
                                 placeholder="Password confirmation" 
                                 name="password_confirmation" 
@@ -101,7 +101,7 @@ function Signup({signUp}) {
                             />
                         </div>
                     </div>
-                    <div className="submit">
+                    <div className="signup-btn">
                         <button type="submit" className="btn btn-primary center bttn">Signup</button>
                     </div>
                 </form>

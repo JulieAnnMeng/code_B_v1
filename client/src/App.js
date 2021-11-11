@@ -1,39 +1,38 @@
 import './App.css';
 import { Routes, Route, useNavigate  } from 'react-router-dom'
 import React, { useState, useEffect } from "react";
-import Navbar from './components/Navbar';
 import Home from "./components/Home";
+import Navbar from './components/Navbar';
 import Login from "./components/Login";
-import Logout from "./components/Logout";
 import Signup from "./components/Signup";
-import ProfilePage from "./components/ProfilePage";
-import ProfileEdit from './components/ProfileEdit';
-import UserPage from "./components/UserPage";
 import DiscussionCard from "./components/DiscussionCard";
 import Discussion from "./components/Discussion";
 import CommentForm from "./components/CommentForm";
 import DiscussionForm from './components/DiscussionForm';
-
+import UserPage from "./components/UserPage";
+import ProfilePage from "./components/ProfilePage";
+import ProfileEdit from './components/ProfileEdit';
 // import Footer from "./components/Footer";
 
 function App() {
   const [board, setBoard] = useState(null);
   const [user, setUser] = useState(null);
   const [searchReturn, setSearchReturn] = useState(null);
-  // const [errors, setErrors] = useState(null);
-  const navigate = useNavigate();
+  const [loggedOn, setLoggedOn] = useState(false);
+  const [errors, setErrors] = useState(null);
 
+  const navigate = useNavigate();
 
   useEffect(() => {
     getDiscussions()
     getUser()
-  }, []);
-
+  }, [loggedOn]);
+  
   function getDiscussions() {
     fetch("/discussions")
     .then((response) => response.json())
     .then((data) => setBoard(data))
-    .catch((error) => console.log(error))
+    .catch((error) => setErrors(error))
   }
 
   function getUser() {
@@ -46,7 +45,7 @@ function App() {
       } else {
         r.json().then(setUser(null))
       }})
-    .catch((error) => console.log(error))
+    .catch((error) => setErrors(error))
   }
 
   function logIn (data) {
@@ -61,12 +60,12 @@ function App() {
       if (r.ok) {
         r.json().then((data) => {
           setUser(data);
-          console.log(data.username, "logged in")
+          setLoggedOn(true)
           navigate('/UserPage');
         });
       } 
       else {
-        r.json().then((err) => console.log(err.errors));
+        r.json().then((err) => setErrors(err.errors));
       }
     })
     .catch(error => console.log("Log in incorrect: ", error))
@@ -78,7 +77,7 @@ function App() {
 		}).then(() => {
       navigate("/");
 			setUser(null);
-			console.log(`${user.username} logged out!`);
+      setLoggedOn(false)
 		});
 	}
 
@@ -94,12 +93,12 @@ function App() {
       if (r.ok) {
         r.json().then((data) => {
           setUser(data);
-          console.log(data.username, "logged in")
+          setLoggedOn(true)
           navigate('/UserPage');
         });
       } 
       else {
-        r.json().then((err) => console.log(err.errors));
+        r.json().then((err) => setErrors(err.errors));
       }
     })
     .catch(error => console.log("Log in incorrect: ", error))
@@ -118,8 +117,9 @@ function App() {
         r.json();
         }
       else {
-        r.json().then((err) => console.log(err.errors));
+        r.json().then((err) => setErrors(err.errors));
       }
+      getDiscussions()
       navigate(`/Discussion/${data.discussion_id}`);
     })
     .catch(error => console.log("Log in incorrect: ", error))
@@ -139,19 +139,20 @@ function App() {
   }
 
   function userEdit(id, data){
+    let updates = Object.fromEntries(Object.entries(data).filter(([_, v]) => v !== ''))
     fetch(`/userEdit/${id}`,{
       method: "PATCH",
       headers: {
         'Content-Type': 'application/json'
         },
-      body: JSON.stringify(data)
+      body: JSON.stringify(updates)
     })
     .then((r) => {
       if (r.ok) {
         r.json();
         }
       else {
-        r.json().then((err) => console.log(err.errors));
+        r.json().then((err) => setErrors(err.errors));
       }
       getUser();
       navigate(`/ProfilePage`);
@@ -170,9 +171,16 @@ function App() {
         discussion_id
       })
     })
-    .then((r) => r.json())
-    // change reload to just rerender the container or button
-    // .then(data => console.log(data))
+    .then((r) => {
+      if (r.ok) {
+        r.json();
+        }
+      else {
+        r.json().then((err) => setErrors(err.errors));
+      }
+      getUser();
+      getDiscussions();
+    })
     .catch(error => console.log("Log in incorrect: ", error))
   }
 
@@ -193,7 +201,7 @@ function App() {
         r.json();
         }
       else {
-        r.json().then((err) => console.log(err.errors));
+        r.json().then((err) => setErrors(err.errors));
       }
       navigate(`/UserPage`);
     })
@@ -213,7 +221,7 @@ function App() {
         r.json();
         }
       else {
-        r.json().then((err) => console.log(err.errors));
+        r.json().then((err) => setErrors(err.errors));
       }
       navigate(`/UserPage`);
     })
@@ -223,21 +231,21 @@ function App() {
   return (
     <div className="App">
       <Navbar user={user} board={board} setSearchReturn={setSearchReturn} logOut={logOut} />
-      {/* <Discussion user={user} addInterest={addInterest} /> */}
+
       <Routes>
         <div>
           <Route exact path="/" element={board ? <Home addInterest={addInterest} user={user} board={searchReturn ? searchReturn : board} /> : <div className="spinner-border text-info center container" role="status"><span className="visually-hidden">Loading...</span></div> } />
-            <Route exact path={user ? "/Logout": "/Login"} element={user ? <Logout /> : <Login logIn={logIn} />} />
+            <Route exact path={user ? "/Logout": "/Login"} element={user ? null : <Login logIn={logIn} errors={errors} />} />
             <Route exact path={user ? "/ProfilePage" : "/Signup"} element={user? <ProfilePage user={user}/> : <Signup signUp={signUp} />} />
-            <Route exact path={"/Discussion"} element={<Discussion user={user} addInterest={addInterest} />} />
-            <Route exact path={"/DiscussionCard"} element={<DiscussionCard logOn={user} />} />
-            <Route exact path={"/Discussion/:id"} element={<Discussion user={user} addInterest={addInterest} />} />
             <Route exact path={"/UserPage"} element={<UserPage user={user} getUser={getUser} />} />
-            <Route exact path={"/CommentForm/:id"} element={<CommentForm user={user} board={board} getDiscussions={getDiscussions} addComment={addComment} />} />
+            <Route exact path={"/ProfileEdit"} element={<ProfileEdit user={user} userEdit={userEdit} />} />
+            <Route exact path={"/Discussion"} element={<Discussion user={user} board={board} addInterest={addInterest} />} />
+            <Route exact path={"/DiscussionCard"} element={<DiscussionCard  />} />
+            <Route exact path={"/Discussion/:id"} element={<Discussion user={user} board={board} addInterest={addInterest} />} />
             <Route exact path={"/DiscussionForm"} element={<DiscussionForm user={user} startDiscussion={startDiscussion}/>} />
             <Route exact path={"/DiscussionForm/:id"} element={<DiscussionForm user={user} board={board} editUserDiscussion={editUserDiscussion} />} />
+            <Route exact path={"/CommentForm/:id"} element={<CommentForm user={user} board={board} getDiscussions={getDiscussions} addComment={addComment} />} />
             <Route exact path={"/Discussion/:discussion_id/CommentForm/:id/"} element={<CommentForm user={user} getDiscussions={getDiscussions} board={board} editUserComment={editUserComment} />} />
-            <Route exact path={"/ProfileEdit"} element={<ProfileEdit user={user} userEdit={userEdit} />} />
         </div>
       </Routes>
       

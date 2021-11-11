@@ -11,11 +11,18 @@ class InterestsController < ApplicationController
     end
 
     def create
-        interest = Interest.new(interest_params)
-        if interest.save
-            render json: interest, status: :created
+        userInterests = Interest.where(user_id: params[:user_id])
+        alreadyInterested = userInterests.filter{|interest| interest.discussion_id == params[:discussion_id]}
+        if alreadyInterested.first
+            # byebug
+            render json: ["Already Interested"], status: :unauthorized
         else
-            render json: {errors: interest.errors}, status: :unauthorized
+            interest = Interest.new(interest_params)
+            if interest.save
+                render json: interest, status: :created
+            else
+                render json: {errors: interest.errors}, status: :unauthorized
+            end
         end
     end
 

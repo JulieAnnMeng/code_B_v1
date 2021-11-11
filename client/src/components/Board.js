@@ -1,23 +1,24 @@
-import React, {useState} from 'react';
+import React from 'react';
 import DiscussionCard from './DiscussionCard';
 
-function Board({id, logOn, addInterest, topic, discussion, user, comments, interests}) {
-    const [interestCount, setInterestCount] = useState(interests.length)
+function Board({id, username, addInterest, topic, discussion, user, comments, interests, interestCount, interestStar}) {
+
     let commentCount = comments.length;
-  
+
         return (
             <div className="card" id={id}>
                 <DiscussionCard 
                     key={id}
                     id={id}
-                    logOn={logOn}
+                    user={user}
+                    interests={interests}
                     addInterest={addInterest}
+                    interestStar={interestStar}
                     topic={topic}
                     discussion={discussion}
-                    user={user}
+                    username={username}
                     commentCount={commentCount}
                     interestCount={interestCount}
-                    setInterestCount={setInterestCount}
                 />
                 &nbsp;
             </div>       

@@ -132,9 +132,9 @@ span {
 }
 
 .login-outside {
-  width: 1200px;
+  width: 1000px;
   height: 475px;
-  left: 130px;
+  /* left: 50px; */
   top: 200px;
   margin-top: 25px;
   padding-top: 50px;
@@ -144,12 +144,12 @@ span {
 }
 
 .login-inside {
-  width: 925px;
+  width: 850px;
   height: 350px;
-  left: 200px;
+  /* left: 200px; */
   top: 450px;
   margin-top: 20px;
-  padding: 30px 50px 75px 100px;
+  padding: 35px 35px 50px 55px;
 
   background: rgba(166, 173, 173, 0.35);
   border-radius: 25px;
@@ -206,10 +206,11 @@ div.col-sm-10.signup-input {
   padding-left: 25px;
   width: 550px;
 }
+
 .input {
   height: 60px;
   border-radius: 15px;
-  width: 550px;
+  width: 500px;
 }
 
 .right {
@@ -265,9 +266,20 @@ div.col-sm-10.signup-input {
   line-height: 25px;
 }
 
+div.edit-password.container {
+  /* width: 990px;
+  height: 275px;
+  top: 450px;
+  margin-top: 20px;
+  padding: 25px 15px 25px 25px; */
+
+  background: rgba(166, 173, 173, 0.35);
+  border-radius: 15px;
+}
+
 .edit-outside {
   width: 1250px;
-  height: 1000px;
+  height: 875px;
   top: 50px;
   margin-top: 25px;
   padding-top: 50px;
@@ -278,7 +290,7 @@ div.col-sm-10.signup-input {
 
 .edit-inside {
   width: 1050px;
-  height: 875px;
+  height: 750px;
   top: 450px;
   margin-top: 20px;
   padding: 25px 15px 25px 25px;
@@ -303,6 +315,33 @@ div.col-sm-10.signup-input {
   padding-right: 350px;
   /* padding-left: 310px; */
 }
+
+.password-bttn {
+  height: 81px;
+
+  background: #B5D6D8;
+  border-radius: 25px;
+
+  font-family: 'Quantico', sans-serif;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 25px;
+  
+  color: #32A2AA;
+  border: 1px solid #0C1224;
+}
+
+.password-bttn:hover, .password-bttn:focus {
+  background: #32A2AA;
+}
+
+.hidden { 
+  display:none;
+  background: rgba(166, 173, 173, 0.35);
+}
+
+
 
 
 /* -----------------------------End of Meyer Reset--------------------------------- */

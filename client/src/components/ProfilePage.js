@@ -5,14 +5,14 @@ function ProfilePage({user}) {
 
     let welcome;
     if (user) {
-        welcome = <Link to='/UserPage' className='welcome'> 🙂 {user.first_name}</Link>
+        welcome = <Link to='/UserPage' className='welcome'>{user.first_name} 🙂</Link>
     } else {
         welcome = null;
     }  
 
     return (
         <div className="container card">
-            <br /><br /><h1 className='welcome'> 🙂 Welcome {welcome}</h1><br />
+            <br /><br /><h1 className='welcome'> Welcome {welcome}</h1><br />
             <div className="container card"><br/>
             <div className="input-group mb-3 justify-content-between">
                 <div className="input-group-prepend">

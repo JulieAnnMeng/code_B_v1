@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom'
 function DiscussionForm({user, startDiscussion, editUserDiscussion, board}) {
     const { id } = useParams();
     
-    let discussionFormData;
+    let discussionFormData = {user_id: user.id, topic: "", discussion: ""};
 
     if(board){
          id ? discussionFormData = board.find(dis => parseInt(dis.id) === parseInt(id)) 

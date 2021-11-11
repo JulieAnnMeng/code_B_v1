@@ -21,10 +21,12 @@ class UsersController < ApplicationController
         if user&.authenticate(params[:password])
             # byebug
             if params[:new_password]
-                if user.update(password: params[:new_password])
-                    render json: user, status: :created
-                else
-                    render json: {errors: user.errors}, status: :unauthorized
+                if params[:new_password] == params[:new_password_confirmation]
+                    if user.update(password: params[:new_password])
+                        render json: user, status: :created
+                    else
+                        render json: {errors: user.errors}, status: :unauthorized
+                    end
                 end
             else
                 if user.update(user_params)
