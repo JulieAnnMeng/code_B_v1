@@ -78,6 +78,34 @@ span {
   color: #32A2AA;
 }
 
+.icon {
+  font-family: 'Quantico', sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 52px;
+  margin-right: 25%;
+  background-color: #32A2AA;
+  border-radius: 50%;
+  text-decoration-line: none;
+  outline: 2px solid #1B4756;
+
+  color: white;
+}
+
+.small-icon {
+  font-family: 'Quantico', sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  margin-right: 5px;
+  background-color: #32A2AA;
+  border-radius: 50%;
+  text-decoration-line: none;
+  outline: 2px solid #1B4756;
+
+  color: white;
+}
+
 .board {
   font-family: 'Quantico', sans-serif;
   font-style: normal;

@@ -7,12 +7,27 @@ function Home({board, addInterest, user}) {
     let discussion;
     let interestStar;
     let interests;
+    let icon;
+
+    if(user) {
+        if(user.icon){
+            icon = user.icon;
+        } else {
+            icon = <Link to='/UserPage' className='icon'>{user.first_name.charAt(0) + user.last_name.charAt(0)}</Link>;
+        }
+    }
 
     // if(board){
         discussion = board.map(entry => {
+            let commentorIcon;
             if (user) {
                 interestStar = user.userPage.interests.find(interest => interest.discussion_id === entry.id) ? true : false
                 interests = user.userPage.interests
+                if(entry.user.icon){
+                    commentorIcon = entry.user.icon;
+                } else {
+                    commentorIcon = entry.user.first_name.charAt(0) + entry.user.last_name.charAt(0);
+                }
             } else {
                 interestStar = null;
                 interests = null;
@@ -27,23 +42,27 @@ function Home({board, addInterest, user}) {
                     interests={interests}
                     interestStar={interestStar}
                     addInterest={addInterest}
+                    icon={commentorIcon}
                     username={entry.user.username}
                     comments={entry.comments}
                     interestCount={entry.interests.length}
                 />
             )
         })    
-    // } else {
-    //     <div className="spinner-border text-info center container" role="status">
-    //         <span className="visually-hidden">Loading...</span>
-    //     </div>
-    // }
     
     return (
         <div className='container'>
             <div className='intro'>
-                <br /><br /><h1 className='welcome'>Welcome {user ? <Link to='/UserPage' className='welcome'> 🙂 {user.first_name}</Link> : null} to Code <span>B</span></h1><br />
-                <p className='info'>
+
+                <br /><br /><h1 className='welcome'>Welcome {user ? user.username + ' '  : null}to Code <span>B</span></h1><br /><br />
+                {user ?
+                <div className="d-grid gap-2 d-md-block">
+                    {icon}
+                    <Link to={`/DiscussionForm`} className="btn btn-primary btn-outline-success bttn me-2"><br/>Start a discussion<br/></Link>
+                </div>    
+                : null}
+                
+                <br /><p className='info'>
                     A forum for all coding discussions, where users can interact with each other and continue their education in programming.
                 </p><br/>
             </div>

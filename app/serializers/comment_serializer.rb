@@ -4,6 +4,6 @@ class CommentSerializer < ActiveModel::Serializer
   has_one :discussion
 
   def commentor
-    return object.user.username
+    return {id: object.user.id, user: object.user.username, first_name: object.user.first_name, last_name: object.user.last_name, icon: object.user.icon}
   end
 end

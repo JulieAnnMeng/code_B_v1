@@ -2,7 +2,7 @@ import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
 
-function DiscussionCard({user, addInterest, interestStar, id, topic, discussion, username, commentCount, interestCount, interests}) {
+function DiscussionCard({user, addInterest, interestStar, id, topic, discussion, icon, username, commentCount, interestCount, interests}) {
     const navigate = useNavigate();
     
     function handleInterest(e) {
@@ -26,7 +26,10 @@ function DiscussionCard({user, addInterest, interestStar, id, topic, discussion,
             <div className="card"><br/>
                 <Link to={`/Discussion/${id}`} className="title"  > {topic} </Link><br/>
                 <p>{discussion}</p>
-                <p>🙂 {username}</p>
+                <p>
+                    <Link to={`/Discussion/${id}`} className='small-icon'>{icon}</Link> 
+                    {username}                
+                </p>
                 <div className="d-grid gap-2 d-md-block">
                     <button className="btn btn-primary bttn2" onClick={handleInterest} >{interestStar ? " ★ " : " ☆ " } <span className="badge bg-secondary">{interestCount}</span> Interests</button>
                     &nbsp; &nbsp;

@@ -1,7 +1,7 @@
 import React from 'react';
 import DiscussionCard from './DiscussionCard';
 
-function Board({id, username, addInterest, topic, discussion, user, comments, interests, interestCount, interestStar}) {
+function Board({id, username, addInterest, topic, discussion, icon, user, comments, interests, interestCount, interestStar}) {
 
     let commentCount = comments.length;
 
@@ -16,6 +16,7 @@ function Board({id, username, addInterest, topic, discussion, user, comments, in
                     interestStar={interestStar}
                     topic={topic}
                     discussion={discussion}
+                    icon={icon}
                     username={username}
                     commentCount={commentCount}
                     interestCount={interestCount}
