@@ -3,16 +3,21 @@ import { Link } from 'react-router-dom'
 
 function ProfilePage({user}) {
 
-    let welcome;
-    if (user) {
-        welcome = <Link to='/UserPage' className='welcome'>{user.first_name} 🙂</Link>
-    } else {
-        welcome = null;
-    }  
+    let icon;
+
+    if(user) {
+        if(user.icon){
+            icon = user.icon;
+        } else {
+            icon = user.first_name.charAt(0) + user.last_name.charAt(0);
+        }
+    }
 
     return (
-        <div className="container card">
-            <br /><br /><h1 className='welcome'> Welcome {welcome}</h1><br />
+        <div className="container">
+            <br /><br /><h1 className='welcome'><Link to='/UserPage' className='icon'>{icon}</Link> Welcome {user.first_name + ' ' + user.last_name}</h1><br /><br />
+            <Link to={`/DiscussionForm`} className="btn btn-primary btn-outline-success bttn discus-bttn"><br/>Start a discussion<br/></Link><br /><br />
+
             <div className="container card"><br/>
             <div className="input-group mb-3 justify-content-between">
                 <div className="input-group-prepend">
@@ -28,6 +33,7 @@ function ProfilePage({user}) {
                             <br /><h3 className="title">Personal Info</h3>
                             <br /><p><span>Name: </span>{user.first_name} {user.last_name}</p>
                             <p><span>Username: </span>{user.username}</p>
+                            <p><span>Icon: </span>&nbsp;<a href='/UserPage' className='small-icon'>{icon}</a></p>
                             <p><span>Password: </span>**********</p><br />
                         </div>
                     </div>

@@ -3,17 +3,20 @@ import { Link } from 'react-router-dom'
 
 
 function ProfileEdit({user, userEdit}) {
-    const blankFormData = {first_name: '', last_name: '', username: '', password: '', new_password: '', new_password_confirmation: ''};
+    const blankFormData = {first_name: '', last_name: '', username: '', icon: '', password: '', new_password: '', new_password_confirmation: ''};
     const [formData, setFormData] = useState(blankFormData); 
     const [toggle, setToggle] = useState(false);
     const [match, setMatch] = useState(true);
 
-    let welcome;
-    if (user) {
-        welcome = <Link to='/UserPage' className='welcome'> 🙂 {user.first_name}</Link>
-    } else {
-        welcome = null;
-    } 
+    let icon;
+
+    if(user) {
+        if(user.icon){
+            icon = user.icon;
+        } else {
+            icon = user.first_name.charAt(0) + user.last_name.charAt(0);
+        }
+    }
 
     function handleChange(e){
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -51,7 +54,7 @@ function ProfileEdit({user, userEdit}) {
 
     return (
         <div className='container'><br />
-        <br /><br /><h1 className='welcome'> 🙂 Welcome {welcome}</h1><br /><br />
+        <br /><br /><h1 className='welcome'><Link to='/UserPage' className='icon'>{icon}</Link> Welcome {user.first_name + ' ' + user.last_name}</h1><br /><br />
         <h1 className='form-title'>Profile Edits</h1>
         <div className='container card edit-outside'>
             <div className='container edit-inside'>
@@ -101,6 +104,22 @@ function ProfileEdit({user, userEdit}) {
                                 name="username" 
                                 // pattern="/^[A-Za-z]+$/" 
                                 value={formData.username}
+                                onChange={handleChange}
+                            />
+                        </div>
+                    </div>
+                    &nbsp;
+                    <div className="row mb-3">
+                        <label className="col-sm-2 col-form-label edit-label"><span>Icon URL</span></label>
+                        <div className="col-sm-10 edit-input d-grid gap-2 d-md-flex justify-content-md-end" style={{width: '55%'}}>
+                            <input 
+                                id="icon-edit"
+                                type="icon" 
+                                className="form-control input" 
+                                placeholder="icon"
+                                name="icon" 
+                                // pattern="/^[A-Za-z]+$/" 
+                                value={formData.icon}
                                 onChange={handleChange}
                             />
                         </div>

@@ -20,18 +20,22 @@ function Home({board, addInterest, user}) {
     // if(board){
         discussion = board.map(entry => {
             let commentorIcon;
+
             if (user) {
-                interestStar = user.userPage.interests.find(interest => interest.discussion_id === entry.id) ? true : false
-                interests = user.userPage.interests
-                if(entry.user.icon){
-                    commentorIcon = entry.user.icon;
-                } else {
-                    commentorIcon = entry.user.first_name.charAt(0) + entry.user.last_name.charAt(0);
-                }
+                interestStar = user.userPage.interests.find(interest => interest.discussion_id === entry.id) ? true : false;
+                interests = user.userPage.interests;
+                
             } else {
                 interestStar = null;
                 interests = null;
             }
+
+            if(entry.user.icon){
+                commentorIcon = entry.user.icon;
+            } else {
+                commentorIcon = entry.user.first_name.charAt(0) + entry.user.last_name.charAt(0);
+            }
+
             return (
                 <Board 
                     key={entry.id}
@@ -55,19 +59,15 @@ function Home({board, addInterest, user}) {
         <div className='container'>
             <div className='intro'>
 
-                <br /><br /><h1 className='welcome'>Welcome {user ? user.username + ' '  : null}to Code <span>B</span></h1><br /><br />
+                <br /><br /><h1 className='welcome'> {user ? icon : null} Welcome to Code <span>B</span></h1><br /><br />
                 {user ?
-                <div className="d-grid gap-2 d-md-block">
-                    {icon}
-                    <Link to={`/DiscussionForm`} className="btn btn-primary btn-outline-success bttn me-2"><br/>Start a discussion<br/></Link>
-                </div>    
-                : null}
-                
+                    <Link to={`/DiscussionForm`} className="btn btn-primary btn-outline-success bttn discus-bttn"><br/>Start a discussion<br/></Link>
+                : null}<br />   
                 <br /><p className='info'>
                     A forum for all coding discussions, where users can interact with each other and continue their education in programming.
                 </p><br/>
             </div>
-            <h2 className='board'>Discussion Board</h2><br/>
+            <h2 className='board'>Discussion Board</h2>
             &nbsp;
             {discussion}
             &nbsp; &nbsp;

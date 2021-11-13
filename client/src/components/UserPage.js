@@ -11,7 +11,8 @@ function UserPage({user, getUser}) {
     let interested
     let discussion;
     let comment;
-
+    let icon;
+    
     useEffect(() => {
         getUser();
         setUpdate(false);
@@ -112,6 +113,14 @@ function UserPage({user, getUser}) {
         })
     }
 
+    if (user){
+        if(user.icon){
+            icon = user.icon;
+        } else {
+            icon = <Link to={`/ViewUser/${user.id}`} className='icon'>{user.first_name.charAt(0) + user.last_name.charAt(0)}</Link>;
+        }
+    } else {getUser()}
+
     return (
         <div className="container">
             &nbsp;
@@ -119,7 +128,7 @@ function UserPage({user, getUser}) {
             {user ? 
             <>
                 <div className="card container">
-                    <br /><h1 className="board">🙂 Welcome {user.first_name}</h1><br />
+                    <br /><h1 className="welcome">{icon} Welcome {user.first_name + ' ' + user.last_name}</h1><br />
                 </div>
                 &nbsp;
                 <div className="d-grid gap-2 d-md-flex justify-content-md-center">

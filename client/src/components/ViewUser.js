@@ -1,35 +1,53 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import UserCard from './UserCard';
 
 function ViewUser({user}) {
-    const [update, setUpdate] = useState(false);
     const [userView, setUserView] = useState(null);
     const { id } = useParams();
+    const navigate = useNavigate();
     
     let userInterests;
     let userDiscussions;
     let userComments;
     let discussion;
     let comment;
+    let userViewIcon;
+    let icon;
+
+    if(user) {
+        if(user.icon){
+            icon = user.icon;
+        } else {
+            icon = <Link to='/UserPage' className='icon'>{user.first_name.charAt(0) + user.last_name.charAt(0)}</Link>;
+        }
+    }
 
     useEffect(() => {
-        getUserView();
+        getUserView();      
     }, [id]);
 
     function getUserView() {
-        fetch(`/users/${id}`)
-        .then((r) => r.json())
-        .then((data) => {
-            setUserView(data);
-            })
-        .catch((error) => console.log(error))
+        if (user === null || parseInt(id) !== user.id){
+            fetch(`/users/${id}`)
+            .then((r) => r.json())
+            .then((data) => setUserView(data))
+            .catch((error) => console.log(error))
+        } else {
+            navigate('/UserPage')
+        }
     }
 
     if (userView) {
         userInterests = userView.userPage.interests;
         userDiscussions = userView.userPage.discussions;
         userComments = userView.userPage.userComments;
+        if(userView.icon){
+            userViewIcon = user.icon;
+        } else {
+            userViewIcon = <Link to='#' className='icon'>{userView.first_name.charAt(0) + userView.last_name.charAt(0)}</Link>;
+        }
+
         let userType = 'userView';
 
         discussion = userDiscussions.map(discussion => {
@@ -72,11 +90,11 @@ function ViewUser({user}) {
         <div className="container">
             &nbsp;
             &nbsp;
-            {user && userView ? 
+            {userView ? 
             <>
                 <div className="card container">
-                    <br /><h1 className="board">🙂 Welcome {user.first_name}</h1><br />
-                    <br /><h1 className="welcome">🙂 {userView.first_name} Info</h1><br />
+                <br /><br /><h1 className='welcome'> {user ? icon : null} Welcome to Code <span>B</span></h1><br /><br />
+                    <br /><h1 className="welcome">{userViewIcon} {userView.first_name} Info Page</h1><br />
                 </div>
                 &nbsp;
                 <div className="d-grid gap-2 d-md-flex justify-content-md-center">

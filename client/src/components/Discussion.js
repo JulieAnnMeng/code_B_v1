@@ -84,12 +84,9 @@ function Discussion({user, addInterest, board}) {
                 {discussion ?  
                     <>
                         &nbsp;
-                        <br /><br /><h1 className='welcome'>Welcome {user ? user.username + ' '  : null}to Code <span>B</span></h1><br /><br />
+                        <br /><br /><h1 className='welcome'> {user ? icon : null} Welcome to Code <span>B</span></h1><br /><br />
                         {user ?
-                        <div className="d-grid gap-2 d-md-block">
-                            {icon}
-                            <Link to={`/DiscussionForm`} className="btn btn-primary btn-outline-success bttn me-2"><br/>Start a discussion<br/></Link>
-                        </div>    
+                            <Link to={`/DiscussionForm`} className="btn btn-primary btn-outline-success bttn discus-bttn"><br/>Start a discussion<br/></Link>
                         : null}
                         <br /><br /><h4 className='board'>{discussion.topic}</h4>
                         &nbsp;               
