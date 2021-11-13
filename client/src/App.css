@@ -68,12 +68,18 @@ span {
 .welcome {
   font-family: 'Quantico', sans-serif;
   font-style: normal;
-  /* font-weight: bold; */
   font-size: 68px;
   line-height: 25px;
 
-  /* display: center; */
-  /* align-items: center; */
+  color: #32A2AA;
+}
+
+.welcome-2{
+  font-family: 'Quantico', sans-serif;
+  font-style: normal;
+  margin-left: 15%;
+  font-size: 48px;
+  line-height: 25px;
 
   color: #32A2AA;
 }

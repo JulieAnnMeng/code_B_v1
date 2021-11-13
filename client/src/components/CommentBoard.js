@@ -5,7 +5,6 @@ function CommentBoard({id, comment, commentor}) {
     let icon;
 
     if(commentor) {
-        console.log(commentor)
         if(commentor.icon){
             icon = commentor.icon;
         } else {

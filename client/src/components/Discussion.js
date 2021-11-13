@@ -31,7 +31,6 @@ function Discussion({user, addInterest, board}) {
         if(discussion.comments){
             comments = discussion.comments;
             commentBoard = comments.map(entry => {
-                console.log(entry)
             return (
                 <CommentBoard 
                     key={entry.id}
@@ -54,8 +53,6 @@ function Discussion({user, addInterest, board}) {
             icon = <Link to='/UserPage' className='icon'>{user.first_name.charAt(0) + user.last_name.charAt(0)}</Link>;
         }
         interestStar = user.userPage.interests.find(interest => interest.discussion_id === parseInt(id)) ? true : false;
-        console.log(interestStar)
-        // welcome = <Link to='/UserPage' className='welcome'> {🙂} {user.first_name}</Link>
         tableHeader = commentAvailable
     } else {
         welcome = null;

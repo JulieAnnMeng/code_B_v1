@@ -5,8 +5,6 @@ function Board({id, username, addInterest, topic, discussion, icon, user, commen
 
     let commentCount = comments.length;
 
-    console.log(entryUserID)
-
         return (
             <div className="card" id={id}>
                 <DiscussionCard 

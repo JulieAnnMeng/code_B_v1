@@ -94,7 +94,7 @@ function ViewUser({user}) {
             <>
                 <div className="card container">
                 <br /><br /><h1 className='welcome'> {user ? icon : null} Welcome to Code <span>B</span></h1><br /><br />
-                    <br /><h1 className="welcome">{userViewIcon} {userView.first_name} Info Page</h1><br />
+                    <br /><h1 className="welcome-2">{userViewIcon} {userView.username}'s Info Page</h1><br />
                 </div>
                 &nbsp;
                 <div className="d-grid gap-2 d-md-flex justify-content-md-center">
