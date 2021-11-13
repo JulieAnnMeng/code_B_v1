@@ -1,7 +1,5 @@
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-// import DiscussionForm from './DiscussionForm';
-// import CommentForm from './CommentForm';
 
 
 function UserCard({user, id, interest_id, discussion_id, type, topic, discussion, comment, date, deleteTypeSwitch, setUpdate}) {
@@ -25,7 +23,6 @@ function UserCard({user, id, interest_id, discussion_id, type, topic, discussion
             id = interest_id;
         }
         deleteTypeSwitch(type, id);
-        
     }
     
         return (
@@ -36,10 +33,12 @@ function UserCard({user, id, interest_id, discussion_id, type, topic, discussion
                     <Link to={`/Discussion/${id}`} className="title" > {topic} </Link> <br />
                     <p>{discussion}</p>
                     <p><span>Date created/updated: </span>{date}</p>
-                    <div className="d-grid gap-2 d-md-block">
-                        &nbsp;{type === "interest" ? null : <button className="btn btn-primary bttn2" onClick={handleEdit} > Edit </button>}&nbsp; &nbsp;
-                        <button className="btn btn-primary bttn2" onClick={handleDelete} > Delete</button>
-                    </div><br />
+                    {user === 'user' ? (
+                        <div className="d-grid gap-2 d-md-block">
+                            &nbsp;{type === "interest" ? null : <button className="btn btn-primary bttn2" onClick={handleEdit} > Edit </button>}&nbsp; &nbsp;
+                            <button className="btn btn-primary bttn2" onClick={handleDelete} > Delete</button>
+                        </div>
+                    ): (null)}<br />
                     &nbsp;
                 </div>
             :
@@ -50,10 +49,12 @@ function UserCard({user, id, interest_id, discussion_id, type, topic, discussion
                     <div className="card container">
                         <p>{comment}</p>
                         <p><span>Date created/updated: </span>{date}</p>
-                        <div className="d-grid gap-2 d-md-block">
-                            &nbsp;<button className="btn btn-primary bttn2" onClick={handleEdit} > Edit </button>&nbsp; &nbsp;
-                            <button className="btn btn-primary bttn2" onClick={handleDelete} > Delete</button>
-                        </div><br />
+                        {user === 'user' ? (
+                            <div className="d-grid gap-2 d-md-block">
+                                &nbsp;<button className="btn btn-primary bttn2" onClick={handleEdit} > Edit </button>&nbsp; &nbsp;
+                                <button className="btn btn-primary bttn2" onClick={handleDelete} > Delete</button>
+                            </div>
+                        ) : (null)}<br />
                     </div>
                     &nbsp;
                 </div>

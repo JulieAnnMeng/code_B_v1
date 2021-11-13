@@ -1,77 +1,37 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import UserCard from './UserCard';
 
-function UserPage({user, getUser}) {
+function ViewUser({user}) {
     const [update, setUpdate] = useState(false);
+    const [userView, setUserView] = useState(null);
+    const { id } = useParams();
     
     let userInterests;
     let userDiscussions;
     let userComments;
-    let interested
     let discussion;
     let comment;
 
     useEffect(() => {
-        getUser();
-        setUpdate(false);
-    }, [update]);
+        getUserView();
+    }, [id]);
 
-    function deleteTypeSwitch(type, id) {
-        switch(type) {
-            case 'interest':
-                fetch(`/interests/${id}`, {
-                    method: 'DELETE'
-                })
-                .then(setUpdate(true))
-                .catch(err => console.log(err))
-                break;
-            case 'discussion':
-                fetch(`/discussions/${id}`, {
-                    method: 'DELETE',
-                })
-                .then(setUpdate(true))
-                .catch(err => console.log(err))
-                break;
-            case 'comment':
-                 fetch(`/comments/${id}`, {
-                    method: 'DELETE',
-                })
-                .then(setUpdate(true))
-                .catch(err => console.log(err))
-                break;
-            default:
-                console.log(type)
-                console.log(id)
-                debugger;
-        }
+    function getUserView() {
+        fetch(`/users/${id}`)
+        .then((r) => r.json())
+        .then((data) => {
+            setUserView(data);
+            })
+        .catch((error) => console.log(error))
     }
 
-    if (user) {
-        userInterests = user.userPage.interests;
-        userDiscussions = user.userPage.discussions;
-        userComments = user.userPage.userComments;
-        let userType = 'user';
+    if (userView) {
+        userInterests = userView.userPage.interests;
+        userDiscussions = userView.userPage.discussions;
+        userComments = userView.userPage.userComments;
+        let userType = 'userView';
 
-        interested = userInterests.map(interest => {
-            let type = "interest";
-            if (interest !== null) {
-                return (
-                    <UserCard
-                        key={interest.id}
-                        id={interest.discussion_id}
-                        interest_id={interest.id}
-                        type={type}
-                        topic={interest.topic}
-                        discussion={interest.discussion}
-                        user={userType}
-                        date={interest.interested_date}
-                        deleteTypeSwitch={deleteTypeSwitch}
-                        setUpdate={setUpdate}
-                    />
-            )
-        }        
-    })
         discussion = userDiscussions.map(discussion => {
             let type = "discussion";
             if (discussion !== null) {
@@ -82,10 +42,8 @@ function UserPage({user, getUser}) {
                         type={type}
                         topic={discussion.topic}
                         discussion={discussion.discussion}
-                        user={userType}
                         date={discussion.discussion_date}
-                        deleteTypeSwitch={deleteTypeSwitch}
-                        setUpdate={setUpdate}
+                        user={userType}
                     />
                 )
             }
@@ -101,11 +59,9 @@ function UserPage({user, getUser}) {
                         type={type}
                         topic={comment.discussion_topic}
                         discussion={comment.discussion}
-                        user={userType}
                         comment={comment.comment}
                         date={comment.comment_date}
-                        deleteTypeSwitch={deleteTypeSwitch}
-                        setUpdate={setUpdate}
+                        user={userType}
                     />
                 )
             }
@@ -116,23 +72,17 @@ function UserPage({user, getUser}) {
         <div className="container">
             &nbsp;
             &nbsp;
-            {user ? 
+            {user && userView ? 
             <>
                 <div className="card container">
                     <br /><h1 className="board">🙂 Welcome {user.first_name}</h1><br />
+                    <br /><h1 className="welcome">🙂 {userView.first_name} Info</h1><br />
                 </div>
                 &nbsp;
                 <div className="d-grid gap-2 d-md-flex justify-content-md-center">
                     <Link to={`/DiscussionForm`} className="btn btn-primary btn-outline-success bttn me-2"><br/>Start a discussion<br/></Link>
                 </div>
                 
-                &nbsp;
-                <div className="card container"><br />
-                    <h2 className='board'>Interested Discussions</h2><br />
-                    <div className="container">
-                        {interested}
-                    </div>
-                </div>
                 &nbsp;
                 <div className="card container"><br />
                     <h2 className='board'>Started Discussions</h2><br />
@@ -156,4 +106,4 @@ function UserPage({user, getUser}) {
     )
 }
 
-export default UserPage
+export default ViewUser

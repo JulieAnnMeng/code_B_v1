@@ -1,6 +1,9 @@
 import React, {useState}  from 'react';
+import { Link, useNavigate } from 'react-router-dom'
 
 function Navbar({user, board, setSearchReturn, logOut}) {
+    const navigate = useNavigate();
+
     const [search, setSearch] = useState("")
     let searchResults;
 
@@ -14,6 +17,7 @@ function Navbar({user, board, setSearchReturn, logOut}) {
             return term.topic.toLowerCase().includes(search.toLowerCase()) || term.discussion.toLowerCase().includes(search.toLowerCase())
         });
         setSearchReturn(searchResults);
+        navigate('/');
     }
 
     return (
@@ -22,7 +26,7 @@ function Navbar({user, board, setSearchReturn, logOut}) {
                 {/* <img src={banner} className="App-banner" alt="banner" /> */}
                 <div className="container-fluid">
                     {/* Navbar Home link */}
-                    <a className="navbar-brand" id="Navbar-title" href="/">Code <span>B</span></a>
+                    <a href='/' className="navbar-brand" id="Navbar-title" >Code <span>B</span></a>
                     <form className="d-flex" onSubmit={handleSearch}>
                         <input 
                             id="search" 
@@ -42,14 +46,14 @@ function Navbar({user, board, setSearchReturn, logOut}) {
                             {user ? 
                             <button className="btn btn-outline-success bttn" onClick={logOut} >Logout</button>
                             :
-                            <a className="btn btn-outline-success bttn" href="/Login" id="navBar-bttn">Login</a>}
+                            <Link to="/Login" className="btn btn-outline-success bttn"  id="navBar-bttn">Login</Link>}
                         </li>
                         &nbsp; &nbsp;
                         <li className="bttn">
                             {user ? 
-                            <a className="btn btn-outline-success bttn" href="/ProfilePage" id="navBar-bttn" >👤</a>
+                            <Link to="/ProfilePage" className="btn btn-outline-success bttn"  id="navBar-bttn" >👤</Link>
                             :
-                            <a className="btn btn-outline-success bttn" href="/Signup" id="navBar-bttn" >Signup</a>}
+                            <Link to="/Signup" className="btn btn-outline-success bttn"  id="navBar-bttn" >Signup</Link>}
                         </li>
                     </ul>
                 </div>    

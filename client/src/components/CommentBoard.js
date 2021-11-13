@@ -9,7 +9,7 @@ function CommentBoard({id, comment, commentor}) {
         if(commentor.icon){
             icon = commentor.icon;
         } else {
-            icon = <Link to='#' className='small-icon'>{commentor.first_name.charAt(0) + commentor.last_name.charAt(0)}</Link>;
+            icon = <Link to={`/ViewUser/${commentor.id}`} className='small-icon'>{commentor.first_name.charAt(0) + commentor.last_name.charAt(0)}</Link>;
         }
     }
 

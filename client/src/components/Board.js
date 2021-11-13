@@ -1,9 +1,11 @@
 import React from 'react';
 import DiscussionCard from './DiscussionCard';
 
-function Board({id, username, addInterest, topic, discussion, icon, user, comments, interests, interestCount, interestStar}) {
+function Board({id, username, addInterest, topic, discussion, icon, user, comments, interests, interestCount, interestStar, entryUserID}) {
 
     let commentCount = comments.length;
+
+    console.log(entryUserID)
 
         return (
             <div className="card" id={id}>
@@ -20,6 +22,7 @@ function Board({id, username, addInterest, topic, discussion, icon, user, commen
                     username={username}
                     commentCount={commentCount}
                     interestCount={interestCount}
+                    entryUserID={entryUserID}
                 />
                 &nbsp;
             </div>       

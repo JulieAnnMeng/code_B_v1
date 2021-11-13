@@ -1,6 +1,6 @@
-import React from 'react'
-import { Link, useParams, useNavigate } from 'react-router-dom'
-import CommentBoard from './CommentBoard'
+import React from 'react';
+import { Link, useParams, useNavigate } from 'react-router-dom';
+import CommentBoard from './CommentBoard';
 
 
 function Discussion({user, addInterest, board}) {
@@ -95,7 +95,7 @@ function Discussion({user, addInterest, board}) {
                         &nbsp;               
                         <div className="card container">
                             <p>{discussion.discussion}</p>
-                            <p><Link to={`#`} className='small-icon'>{commentorIcon}</Link> {discussion.user.username}</p>  
+                            <p><Link to={`/ViewUser/${discussion.user.id}`} className='small-icon'>{commentorIcon}</Link> {discussion.user.username}</p>  
                             &nbsp;  
                             <div className="d-grid gap-2 d-md-block">
                                 <button className="btn btn-primary bttn2" onClick={handleInterest}>{ interestStar ? " ★ " : " ☆ " }<span className="badge bg-secondary">{interestCount}</span> Interests</button>

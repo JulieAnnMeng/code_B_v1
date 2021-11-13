@@ -46,6 +46,7 @@ function Home({board, addInterest, user}) {
                     username={entry.user.username}
                     comments={entry.comments}
                     interestCount={entry.interests.length}
+                    entryUserID={entry.user.id}
                 />
             )
         })    
