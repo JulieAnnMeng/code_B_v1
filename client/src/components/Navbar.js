@@ -46,14 +46,14 @@ function Navbar({user, board, setSearchReturn, logOut}) {
                             {user ? 
                             <button className="btn btn-outline-success bttn" onClick={logOut} >Logout</button>
                             :
-                            <Link to={`/Login`} className="btn bttn" id="navBar-bttn">Login</Link>}
+                            <Link to={`/Login`} className="btn bttn">Login</Link>}
                         </li>
                         &nbsp; &nbsp;
                         <li>
                             {user ? 
-                            <Link to={`/ProfilePage`} className="btn bttn" id="navBar-bttn">👤</Link>
+                            <Link to={`/ProfilePage`} className="btn bttn">👤</Link>
                             :
-                            <Link to={`/Signup`} className="bttn btn" id="navBar-bttn">Signup</Link>}
+                            <Link to={`/Signup`} className="bttn btn">Signup</Link>}
                         </li>
                     </ul>
                 </div>    
