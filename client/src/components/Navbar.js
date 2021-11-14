@@ -38,22 +38,22 @@ function Navbar({user, board, setSearchReturn, logOut}) {
                             value={search}
                             onChange={handleChange}
                         />
-                        <button className="bttn" type="submit">Search</button>
+                        <button className="btn bttn" type="submit">Search</button>
                     </form>
                     {/* Navbar right links */}
                     <ul className="nav" >
                         <li>
                             {user ? 
-                            <button className="bttn" onClick={logOut} >Logout</button>
+                            <button className="btn btn-outline-success bttn" onClick={logOut} >Logout</button>
                             :
-                            <a href="/Login" className="bttn"  id="navBar-bttn">Login</a>}
+                            <Link to="/Login" className="btn bttn"  id="navBar-bttn">Login</Link>}
                         </li>
                         &nbsp; &nbsp;
                         <li>
                             {user ? 
-                            <Link to="/ProfilePage" className="bttn"  id="navBar-bttn" >👤</Link>
+                            <Link to="/ProfilePage" className="btn bttn"  id="navBar-bttn" >👤</Link>
                             :
-                            <a href="/Signup" className="bttn"  id="navBar-bttn" >Signup</a>}
+                            <a href="/Signup" className="bttn btn"  id="navBar-bttn" >Signup</a>}
                         </li>
                     </ul>
                 </div>    
