@@ -8,7 +8,6 @@ import Navbar from './components/Navbar'
 
 ReactDOM.render(
   <Router>
-    <Navbar />
     <App />
   </Router>,
   document.getElementById('root')

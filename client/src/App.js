@@ -232,7 +232,7 @@ function App() {
   return (
     <div className="App">
       
-    {/* <Navbar user={user} board={board} setSearchReturn={setSearchReturn} logOut={logOut} /> */}
+    <Navbar user={user} board={board} setSearchReturn={setSearchReturn} logOut={logOut} />
       
       <Routes>
         
