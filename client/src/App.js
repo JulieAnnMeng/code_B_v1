@@ -232,8 +232,7 @@ function App() {
   return (
     <div className="App">
       
-    <Navbar user={user} board={board} setSearchReturn={setSearchReturn} logOut={logOut} />
-      
+    
       <Routes>
         
         <div>
@@ -255,6 +254,7 @@ function App() {
         </div>
       </Routes>
 
+      <Navbar user={user} board={board} setSearchReturn={setSearchReturn} logOut={logOut} />
       
       
       {/* <Footer /> */}
