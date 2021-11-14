@@ -22,11 +22,11 @@ function Navbar({user, board, setSearchReturn, logOut}) {
 
     return (
         <div>
-            <nav className="navbar navbar-light bg-light" id="Navbar">
+            <nav className="navbar" id="Navbar">
                 {/* <img src={banner} className="App-banner" alt="banner" /> */}
                 <div className="container-fluid">
                     {/* Navbar Home link */}
-                    <a href='/' className="navbar-brand" id="Navbar-title" >Code <span>B</span></a>
+                    <a href='/' id="Navbar-title" >Code <span>B</span></a>
                     <form className="d-flex" onSubmit={handleSearch}>
                         <input 
                             id="search" 
@@ -38,22 +38,22 @@ function Navbar({user, board, setSearchReturn, logOut}) {
                             value={search}
                             onChange={handleChange}
                         />
-                        <button className="btn btn-outline-success bttn" type="submit">Search</button>
+                        <button className="bttn" type="submit">Search</button>
                     </form>
                     {/* Navbar right links */}
-                    <ul className="nav justify-content-end nav-pills" >
+                    <ul className="nav" >
                         <li>
                             {user ? 
-                            <button className="btn btn-outline-success bttn" onClick={logOut} >Logout</button>
+                            <button className="bttn" onClick={logOut} >Logout</button>
                             :
-                            <Link to="/Login" className="btn btn-outline-success bttn"  id="navBar-bttn">Login</Link>}
+                            <a href="/Login" className="bttn"  id="navBar-bttn">Login</a>}
                         </li>
                         &nbsp; &nbsp;
                         <li>
                             {user ? 
-                            <Link to="/ProfilePage" className="btn bttn"  id="navBar-bttn" >👤</Link>
+                            <Link to="/ProfilePage" className="bttn"  id="navBar-bttn" >👤</Link>
                             :
-                            <a href="/Signup" className="bttn btn"  id="navBar-bttn" >Signup</a>}
+                            <a href="/Signup" className="bttn"  id="navBar-bttn" >Signup</a>}
                         </li>
                     </ul>
                 </div>    
