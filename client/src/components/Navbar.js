@@ -53,7 +53,7 @@ function Navbar({user, board, setSearchReturn, logOut}) {
                             {user ? 
                             <Link to={`/ProfilePage`} className="btn bttn">👤</Link>
                             :
-                            <Link to={`/Signup`} className="bttn btn">Signup</Link>}
+                            <Link to={`/Signup`} className="btn btn-primary bttn">Signup</Link> }
                         </li>
                     </ul>
                 </div>    
