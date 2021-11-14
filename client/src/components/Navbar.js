@@ -53,6 +53,7 @@ function Navbar({user, board, setSearchReturn, logOut}) {
                             {user ? 
                             <Link to={`/ProfilePage`} className="btn bttn">👤</Link>
                             :
+                            // unable to get signup or login buttons to work on Heroku
                             <button to={`/Signup`} className="btn btn-primary bttn" onClick={() => navigate(`/Signup`)}>Signup</button> }
                         </li>
                     </ul>
