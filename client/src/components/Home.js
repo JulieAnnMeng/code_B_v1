@@ -72,6 +72,7 @@ function Home({board, addInterest, user}) {
             {discussion}
             &nbsp; &nbsp;
         </div>
+
     )
 }
 

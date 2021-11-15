@@ -1,6 +1,6 @@
 import './App.css';
-import { Routes, Route, useNavigate  } from 'react-router-dom'
-import React, { useState, useEffect } from "react";
+import { Routes, Route, useNavigate, Link } from 'react-router-dom'
+import React, { useState, useEffect, Outlet } from "react";
 import Home from "./components/Home";
 import Navbar from './components/Navbar';
 import Login from "./components/Login";
@@ -21,6 +21,8 @@ function App() {
   const [searchReturn, setSearchReturn] = useState(null);
   const [loggedOn, setLoggedOn] = useState(false);
   const [errors, setErrors] = useState(null);
+  const [search, setSearch] = useState("")
+  let searchResults;
 
   const navigate = useNavigate();
 
@@ -229,21 +231,71 @@ function App() {
     .catch(error => console.log("Log in incorrect: ", error))
   }
 
+  function handleChange(e){
+      setSearch(e.target.value)
+  }
+
+  function handleSearch(e){
+      e.preventDefault();
+      searchResults = board.filter( function (term) {
+          return term.topic.toLowerCase().includes(search.toLowerCase()) || term.discussion.toLowerCase().includes(search.toLowerCase())
+      });
+      setSearchReturn(searchResults);
+      navigate('/');
+  }
+
   return (
     <div className="App">
-
-      <Navbar user={user} board={board} setSearchReturn={setSearchReturn} logOut={logOut} />
+      {/* <Navbar user={user} board={board} setSearchReturn={setSearchReturn} logOut={logOut} /> */}
+      <nav className="navbar container-fluid" id="Navbar">
+              {/* Navbar Home link */}
+              <a href='/' id="Navbar-title" >Code <span>B</span></a>
+              <form className="d-flex" onSubmit={handleSearch}>
+                  <input 
+                      id="search" 
+                      className="form-control me-2 bttn" 
+                      type="search" 
+                      placeholder="🔍 Search code_B" 
+                      aria-label="Search" 
+                      name="search" 
+                      value={search}
+                      onChange={handleChange}
+                  />
+                  <button className="btn bttn" type="submit">Search</button>
+              </form>
+              {/* Navbar right links */}
+              <ul className="nav" >
+                  <li>
+                      {user ? 
+                      <button className="btn btn-outline-success bttn" onClick={logOut} >Logout</button>
+                      :
+                      <Link to={`/Login`} className="btn bttn">Login</Link>}
+                  </li>
+                  &nbsp; &nbsp;
+                  <li>
+                      {user ? 
+                      <Link to={`/ProfilePage`} className="btn bttn">👤</Link>
+                      :
+                      // unable to get signup or login buttons to work on Heroku
+                      <button to={`/Signup`} className="btn btn-primary bttn" onClick={() => navigate(`Signup`)}>Signup</button> }
+                  </li>
+              </ul>
+      </nav>
+      {/* <Outlet /> */}
     
       <Routes>
         
         <div>
           
-          <Route exact path="/" element={board ? <Home addInterest={addInterest} user={user} board={searchReturn ? searchReturn : board} /> : <div className="spinner-border text-info center container" role="status"><span className="visually-hidden">Loading...</span></div> } />
+            <Route exact path="/" element={board ? <Home addInterest={addInterest} user={user} setSearchReturn={setSearchReturn} logOut={logOut} board={searchReturn ? searchReturn : board} /> : <div className="spinner-border text-info center container" role="status"><span className="visually-hidden">Loading...</span></div> } />
+            
             <Route exact path={"Login"} element={<Login logIn={logIn} errors={errors} />} />
             <Route exact path={"Logout"} element={null} />
             <Route path={user ? "ProfilePage" : "Signup"} element={user? <ProfilePage user={user}/> : <Signup signUp={signUp} />} />
             <Route exact path={"/UserPage"} element={<UserPage user={user} getUser={getUser} />} />
             {/* <Route exact path={"/UserPage/:id"} element={<UserPage user={user} />} /> */}
+            
+            
             <Route exact path={"/ProfileEdit"} element={<ProfileEdit user={user} userEdit={userEdit} />} />
             <Route exact path={"/Discussion"} element={<Discussion user={user} board={board} addInterest={addInterest} />} />
             <Route exact path={"/DiscussionCard"} element={<DiscussionCard  />} />
