@@ -1,5 +1,5 @@
 import React, {useState}  from 'react';
-import { Link, useNavigate, Outlet } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 function Navbar({user, board, setSearchReturn, logOut}) {
     const navigate = useNavigate();
@@ -22,7 +22,9 @@ function Navbar({user, board, setSearchReturn, logOut}) {
 
     return (
         <div>
-            <nav className="navbar container-fluid" id="Navbar">
+            <nav className="navbar" id="Navbar">
+                {/* <img src={banner} className="App-banner" alt="banner" /> */}
+                <div className="container-fluid">
                     {/* Navbar Home link */}
                     <a href='/' id="Navbar-title" >Code <span>B</span></a>
                     <form className="d-flex" onSubmit={handleSearch}>
@@ -36,26 +38,25 @@ function Navbar({user, board, setSearchReturn, logOut}) {
                             value={search}
                             onChange={handleChange}
                         />
-                        <button className="btn bttn" type="submit">Search</button>
+                        <button className="bttn" type="submit">Search</button>
                     </form>
                     {/* Navbar right links */}
-                    {/* <ul className="nav" >
+                    <ul className="nav" >
                         <li>
                             {user ? 
                             <button className="btn bttn" onClick={logOut} >Logout</button>
                             :
-                            <Link to={`Login`} className="btn bttn">Login</Link>}
-                            <Outlet />
+                            <a href="/Login" className="btn bttn"  id="navBar-bttn">Login</a>}
                         </li>
                         &nbsp; &nbsp;
                         <li>
                             {user ? 
-                            <Link to={`ProfilePage`} className="btn bttn">👤</Link>
+                            <Link to="/ProfilePage" className="btn bttn"  id="navBar-bttn" >👤</Link>
                             :
-                            // unable to get signup or login buttons to work on Heroku
-                            <Link to={`Signup`} className="btn bttn">Signup</Link> }
+                            <a href="/Signup" className="btn bttn"  id="navBar-bttn" >Signup</a>}
                         </li>
-                    </ul> */}
+                    </ul>
+                </div>    
             </nav>
         </div>
     )

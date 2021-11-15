@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import Board from './Board'
 
-function Home({board, addInterest, user, logOut, navTabs}) {
+function Home({board, addInterest, user}) {
 
     let discussion;
     let interestStar;
@@ -57,13 +57,11 @@ function Home({board, addInterest, user, logOut, navTabs}) {
     
     return (
         <div className='container'>
-            {navTabs}
             <div className='intro'>
-
-                <br /><br /><h1 className='welcome'> {user ? icon : null} Welcome to Code <span>B</span></h1>
-                {user ?
-                    <Link to={`/DiscussionForm`} className="btn btn-primary btn-outline-success bttn discus-bttn"><br/>Start a discussion<br/></Link>
-                : null}<br />   
+                <br /><br /><h1 className='welcome'> {user ? icon : null} Welcome to Code <span>B</span>{user ?
+                    <Link to={`/DiscussionForm`} className="btn btn-primary bttn discus-bttn"><br/>Start a discussion<br/></Link>
+                : null}</h1>
+                <br />   
                 <br /><p className='info'>
                     A forum for all coding discussions, where users can interact with each other and continue their education in programming.
                 </p><br/>

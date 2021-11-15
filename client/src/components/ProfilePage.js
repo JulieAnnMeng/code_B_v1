@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-function ProfilePage({user, navTabs}) {
+function ProfilePage({user}) {
 
     let icon;
 
@@ -14,10 +14,17 @@ function ProfilePage({user, navTabs}) {
     }
 
     return (
-        <div className="container"><br />
-            {navTabs}
-            <br /><br /><h1 className='welcome'><Link to='/UserPage' className='icon'>{icon}</Link> Welcome {user.first_name + ' ' + user.last_name}</h1><br /><br />
-            <Link to={`/DiscussionForm`} className="btn btn-primary btn-outline-success bttn discus-bttn"><br/>Start a discussion<br/></Link><br /><br />
+        <div className="container"><br /><br />
+            <h1 className='welcome discus-title'> 
+                <Link to='/UserPage' className='icon'>
+                    {icon} 
+                </Link>
+                Welcome {user.first_name + ' ' + user.last_name} 
+                <Link to={`/DiscussionForm`} className="btn bttn discus-bttn">
+                    <br />Start a discussion<br />
+                </Link><br /><br />
+            </h1>
+            <br /><br />
 
             <div className="container card"><br/>
             <div className="input-group mb-3 justify-content-between">

@@ -3,7 +3,7 @@ import { Link, useParams, useNavigate } from 'react-router-dom';
 import CommentBoard from './CommentBoard';
 
 
-function Discussion({user, addInterest, board, navTabs}) {
+function Discussion({user, addInterest, board}) {
     const { id } = useParams();
     const navigate = useNavigate();
 
@@ -77,25 +77,29 @@ function Discussion({user, addInterest, board, navTabs}) {
 
 
         return (
-             <div className="container"><br />
-                 {navTabs}
+             <div className="container">
                 {discussion ?  
                     <>
                         &nbsp;
-                        <br /><br /><h1 className='welcome'> {user ? icon : null} Welcome to Code <span>B</span></h1><br /><br />
+                        <br /><br />
+                        <h1 className='board discus-title'>
+                            {user ? icon : null} 
+                            {discussion.topic}
                         {user ?
-                            <Link to={`/DiscussionForm`} className="btn btn-primary btn-outline-success bttn discus-bttn"><br/>Start a discussion<br/></Link>
+                            <Link to={`/DiscussionForm`} className="btn bttn discus-bttn">
+                                <br/>Start a discussion<br/>
+                            </Link>
                         : null}
-                        <br /><br /><h4 className='board'>{discussion.topic}</h4>
+                        </h1><br /><br />
                         &nbsp;               
                         <div className="card container">
                             <p>{discussion.discussion}</p>
                             <p><Link to={`/ViewUser/${discussion.user.id}`} className='small-icon'>{commentorIcon}</Link> {discussion.user.username}</p>  
                             &nbsp;  
                             <div className="d-grid gap-2 d-md-block">
-                                <button className="btn btn-primary bttn2" onClick={handleInterest}>{ interestStar ? " ★ " : " ☆ " }<span className="badge bg-secondary">{interestCount}</span> Interests</button>
+                                <button className="btn bttn2" onClick={handleInterest}>{ interestStar ? " ★ " : " ☆ " }<span className="badge bg-secondary">{interestCount}</span> Interests</button>
                                 &nbsp; &nbsp;
-                                <Link to={user ? `/CommentForm/${id}` : `/Login`} className="btn btn-primary bttn2"><span className="badge bg-secondary">{discussion.comments.length}</span> Comments</Link>
+                                <Link to={user ? `/CommentForm/${id}` : `/Login`} className="btn bttn2"><span className="badge bg-secondary">{discussion.comments.length}</span> Comments</Link>
                             </div>
                             &nbsp;
                         </div>

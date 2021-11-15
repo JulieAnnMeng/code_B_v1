@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 
-function CommentForm({user, addComment, editUserComment, board, navTabs}) {
+function CommentForm({user, addComment, editUserComment, board}) {
     const { discussion_id, id } = useParams();
 
     let commentFormData;
@@ -38,8 +38,7 @@ function CommentForm({user, addComment, editUserComment, board, navTabs}) {
 
     return (
         <div className="container"><br />
-            {navTabs}<br />
-            <h1 className='board'>Submit a Comment</h1><br />
+            <h1 className='board'>Submit a Comment</h1>
             {discussion ? 
             <>    
                 <div className="card container">

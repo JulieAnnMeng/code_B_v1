@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 // import { Link } from 'react-router-dom'
 
 
-function Signup({signUp, navTabs}) {
+function Signup({signUp}) {
     const blankFormData = {first_name: "", last_name: "", username: "", password: "", password_confirmation: ""}
     const [formData, setFormData] = useState(blankFormData);    
 
@@ -19,8 +19,7 @@ function Signup({signUp, navTabs}) {
     }
 
     return (
-        <div className='container'><br /><br /><br />
-        {navTabs}
+        <div className='container'>
         <h1 className='form-title'>Signup</h1>
         &nbsp;
         <div className='container signup-outside'>

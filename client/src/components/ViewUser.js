@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import UserCard from './UserCard';
 
-function ViewUser({user, navTabs}) {
+function ViewUser({user}) {
     const [userView, setUserView] = useState(null);
     const { id } = useParams();
     const navigate = useNavigate();
@@ -88,7 +88,6 @@ function ViewUser({user, navTabs}) {
 
     return (
         <div className="container">
-            {navTabs}
             &nbsp;
             &nbsp;
             {userView ? 
@@ -98,9 +97,12 @@ function ViewUser({user, navTabs}) {
                     <br /><h1 className="welcome-2">{userViewIcon} {userView.username}'s Info Page</h1><br />
                 </div>
                 &nbsp;
+                {user ?
                 <div className="d-grid gap-2 d-md-flex justify-content-md-center">
                     <Link to={`/DiscussionForm`} className="btn btn-primary btn-outline-success bttn me-2"><br/>Start a discussion<br/></Link>
                 </div>
+                :
+                null}
                 
                 &nbsp;
                 <div className="card container"><br />

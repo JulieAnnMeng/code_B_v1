@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import UserCard from './UserCard';
 
-function UserPage({user, getUser, navTabs}) {
+function UserPage({user, getUser}) {
     const [update, setUpdate] = useState(false);
     
     let userInterests;
@@ -122,20 +122,16 @@ function UserPage({user, getUser, navTabs}) {
     } else {getUser()}
 
     return (
-        <div className="container">
-            &nbsp;
-            {navTabs}
-            &nbsp;
-            {user ? 
-            <>
-                <div className="card container">
-                    <br /><h1 className="welcome">{icon} Welcome {user.first_name + ' ' + user.last_name}</h1><br />
-                </div>
-                &nbsp;
-                <div className="d-grid gap-2 d-md-flex justify-content-md-center">
-                    <Link to={`/DiscussionForm`} className="btn btn-primary btn-outline-success bttn me-2"><br/>Start a discussion<br/></Link>
-                </div>
-                
+        <div className="container"><br /><br />
+            {user ?  <>
+            <h1 className='welcome discus-title'> 
+                    {icon} 
+                Welcome {user.first_name + ' ' + user.last_name} 
+                <Link to={`/DiscussionForm`} className="btn bttn discus-bttn">
+                    <br />Start a discussion<br />
+                </Link><br /><br />
+            </h1>
+            <br /><br />
                 &nbsp;
                 <div className="card container"><br />
                     <h2 className='board'>Interested Discussions</h2><br />

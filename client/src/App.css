@@ -73,6 +73,7 @@ span {
   font-style: normal;
   font-size: 68px;
   line-height: 25px;
+  /* margin-right: 25px; */
 
   color: #32A2AA;
 }
@@ -92,7 +93,7 @@ span {
   font-style: normal;
   font-weight: bold;
   font-size: 52px;
-  margin-right: 15%;
+  margin-right: 5%;
   background-color: #32A2AA;
   border-radius: 50%;
   text-decoration-line: none;
@@ -139,12 +140,18 @@ span {
   color: #1B4756;
 }
 
-.discus-bttn {
-  margin-left: 35%;
+/* .discus-title {
+  padding-right: 275px;
+} */
+
+.discus-bttn{
+  /* margin-left: 5%; */
+  float: right;
 }
 
 .bttn2 {
   background: #32A2AA;
+  color: white;
   border-radius: 10px;
 }
 
@@ -194,6 +201,9 @@ span {
 
   background: rgba(166, 173, 173, 0.35);
   border-radius: 25px;
+}
+li {
+  list-style-type: none;
 }
 
 .signup-outside {

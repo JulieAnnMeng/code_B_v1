@@ -1,5 +1,5 @@
 import './App.css';
-import { Routes, Route, useNavigate, Link, Outlet } from 'react-router-dom'
+import { Routes, Route, useNavigate  } from 'react-router-dom'
 import React, { useState, useEffect } from "react";
 import Home from "./components/Home";
 import Navbar from './components/Navbar';
@@ -13,7 +13,6 @@ import UserPage from "./components/UserPage";
 import ProfilePage from "./components/ProfilePage";
 import ProfileEdit from './components/ProfileEdit';
 import ViewUser from './components/ViewUser';
-// import Board from './components/Board';
 // import Footer from "./components/Footer";
 
 function App() {
@@ -22,8 +21,6 @@ function App() {
   const [searchReturn, setSearchReturn] = useState(null);
   const [loggedOn, setLoggedOn] = useState(false);
   const [errors, setErrors] = useState(null);
-  const [search, setSearch] = useState("")
-  let searchResults;
 
   const navigate = useNavigate();
 
@@ -232,47 +229,29 @@ function App() {
     .catch(error => console.log("Log in incorrect: ", error))
   }
 
-  let navTabs = (
-      <div>
-          {user ? 
-          <div>
-            <button className="btn bttn" onClick={logOut} > Logout </button>&nbsp; &nbsp;
-            <Link className="btn bttn" to={'/ProfilePage'}>👤</Link>
-          </div>
-          : 
-          <div>
-            <Link className="btn bttn" to={'/Login'}>Login</Link>&nbsp; &nbsp;
-            <Link className="btn bttn" to={'Signup'}>Signup</Link>
-          </div>
-          }
-      </div>
-
-  )
-
   return (
     <div className="App">
       <Navbar user={user} board={board} setSearchReturn={setSearchReturn} logOut={logOut} />
 
       <Routes>
-        {/* <div> */}
-          <Route exact path="/" element={board ? <Home navTabs={navTabs} addInterest={addInterest} user={user} logOut={logOut} board={searchReturn ? searchReturn : board} /> : <div className="spinner-border text-info center container" role="status"><span className="visually-hidden">Loading...</span></div> } />
+        <div>
+          <Route exact path="/" element={board ? <Home addInterest={addInterest} user={user} board={searchReturn ? searchReturn : board} /> : <div className="spinner-border text-info center container" role="status"><span className="visually-hidden">Loading...</span></div> } />
             <Route exact path={user ? "/Logout": "/Login"} element={user ? null : <Login logIn={logIn} errors={errors} />} />
             <Route exact path={user ? "/ProfilePage" : "/Signup"} element={user? <ProfilePage user={user}/> : <Signup signUp={signUp} />} />
-            <Route exact path={"/UserPage"} element={<UserPage navTabs={navTabs} user={user} getUser={getUser} />} />
+            <Route exact path={"/UserPage"} element={<UserPage user={user} getUser={getUser} />} />
             {/* <Route exact path={"/UserPage/:id"} element={<UserPage user={user} />} /> */}
-            <Route exact path={"/ProfileEdit"} element={<ProfileEdit user={user} navTabs={navTabs} userEdit={userEdit} />} />
-            <Route exact path={"/Discussion"} element={<Discussion user={user} navTabs={navTabs} board={board} addInterest={addInterest} />} />
+            <Route exact path={"/ProfileEdit"} element={<ProfileEdit user={user} userEdit={userEdit} />} />
+            <Route exact path={"/Discussion"} element={<Discussion user={user} board={board} addInterest={addInterest} />} />
             <Route exact path={"/DiscussionCard"} element={<DiscussionCard  />} />
-            <Route exact path={"/Discussion/:id"} element={<Discussion user={user} navTabs={navTabs} board={board} addInterest={addInterest} />} />
-            <Route exact path={"/DiscussionForm"} element={<DiscussionForm user={user} navTabs={navTabs} startDiscussion={startDiscussion}/>} />
+            <Route exact path={"/Discussion/:id"} element={<Discussion user={user} board={board} addInterest={addInterest} />} />
+            <Route exact path={"/DiscussionForm"} element={<DiscussionForm user={user} startDiscussion={startDiscussion}/>} />
             <Route exact path={"/DiscussionForm/:id"} element={<DiscussionForm user={user} board={board} editUserDiscussion={editUserDiscussion} />} />
-            <Route exact path={"/CommentForm/:id"} element={<CommentForm user={user} navTabs={navTabs} board={board} getDiscussions={getDiscussions} addComment={addComment} />} />
-            <Route exact path={"/Discussion/:discussion_id/CommentForm/:id/"} element={<CommentForm user={user} navTabs={navTabs} getDiscussions={getDiscussions} board={board} editUserComment={editUserComment} />} />
-            <Route exact path={"/ViewUser/:id"} element={<ViewUser user={user} navTabs={navTabs}/>} />
-        {/* </div> */}
+            <Route exact path={"/CommentForm/:id"} element={<CommentForm user={user} board={board} getDiscussions={getDiscussions} addComment={addComment} />} />
+            <Route exact path={"/Discussion/:discussion_id/CommentForm/:id/"} element={<CommentForm user={user} getDiscussions={getDiscussions} board={board} editUserComment={editUserComment} />} />
+            <Route exact path={"/ViewUser/:id"} element={<ViewUser user={user} />} />
+        </div>
       </Routes>
       
-      <Outlet />
       {/* <Footer /> */}
     </div>
   );
