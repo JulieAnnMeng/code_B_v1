@@ -1,5 +1,5 @@
 import React, {useState}  from 'react';
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, Outlet } from 'react-router-dom'
 
 function Navbar({user, board, setSearchReturn, logOut}) {
     const navigate = useNavigate();
@@ -20,21 +20,15 @@ function Navbar({user, board, setSearchReturn, logOut}) {
         navigate('/');
     }
 
-    function handleSignup(e){
-        e.preventDefault();
-        navigate('/Signup');
-    }
-
     return (
         <div>
-            <div >
-                {/* <img src={banner} className="App-banner" alt="banner" /> */}
-                <div>
+            <nav className="navbar container-fluid" id="Navbar">
                     {/* Navbar Home link */}
-                    <a href='/' >Code <span>B</span></a>
-                    <form onSubmit={handleSearch}>
+                    <a href='/' id="Navbar-title" >Code <span>B</span></a>
+                    <form className="d-flex" onSubmit={handleSearch}>
                         <input 
                             id="search" 
+                            className="form-control me-2 bttn" 
                             type="search" 
                             placeholder="🔍 Search code_B" 
                             aria-label="Search" 
@@ -42,26 +36,27 @@ function Navbar({user, board, setSearchReturn, logOut}) {
                             value={search}
                             onChange={handleChange}
                         />
-                        <button type="submit">Search</button>
+                        <button className="btn bttn" type="submit">Search</button>
                     </form>
                     {/* Navbar right links */}
-                    <ul>
+                    {/* <ul className="nav" >
                         <li>
                             {user ? 
-                            <button onClick={logOut} >Logout</button>
+                            <button className="btn bttn" onClick={logOut} >Logout</button>
                             :
-                            <a href="/Login" >Login</a>}
+                            <Link to={`Login`} className="btn bttn">Login</Link>}
+                            <Outlet />
                         </li>
                         &nbsp; &nbsp;
                         <li>
                             {user ? 
-                            <Link to={"/ProfilePage"} >👤</Link>
+                            <Link to={`ProfilePage`} className="btn bttn">👤</Link>
                             :
-                            <Link to={"/Signup"}><button onClick={handleSignup}>Signup</button></Link>}
+                            // unable to get signup or login buttons to work on Heroku
+                            <Link to={`Signup`} className="btn bttn">Signup</Link> }
                         </li>
-                    </ul>
-                </div>    
-            </div>
+                    </ul> */}
+            </nav>
         </div>
     )
 }

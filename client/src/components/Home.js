@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import Board from './Board'
 
-function Home({board, addInterest, user, logOut}) {
+function Home({board, addInterest, user, logOut, navTabs}) {
 
     let discussion;
     let interestStar;
@@ -57,22 +57,10 @@ function Home({board, addInterest, user, logOut}) {
     
     return (
         <div className='container'>
-            
+            {navTabs}
             <div className='intro'>
 
                 <br /><br /><h1 className='welcome'> {user ? icon : null} Welcome to Code <span>B</span></h1>
-
-                <div>
-                    <ul>
-                        <li>
-                            { user ? <button onClick={logOut} >Logout</button> : <Link to={"/Login"}>Login</Link> }
-                        </li>
-                        <li>
-                            { user ? <Link to={"/ProfilePage"} ><button>👤</button></Link> : <Link to={"/Signup"} ><button>Signup</button></Link> }
-                        </li>
-                    </ul>
-                </div>
-
                 {user ?
                     <Link to={`/DiscussionForm`} className="btn btn-primary btn-outline-success bttn discus-bttn"><br/>Start a discussion<br/></Link>
                 : null}<br />   

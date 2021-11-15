@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import UserCard from './UserCard';
 
-function UserPage({user, getUser}) {
+function UserPage({user, getUser, navTabs}) {
     const [update, setUpdate] = useState(false);
     
     let userInterests;
@@ -124,6 +124,7 @@ function UserPage({user, getUser}) {
     return (
         <div className="container">
             &nbsp;
+            {navTabs}
             &nbsp;
             {user ? 
             <>

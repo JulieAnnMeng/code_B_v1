@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import UserCard from './UserCard';
 
-function ViewUser({user}) {
+function ViewUser({user, navTabs}) {
     const [userView, setUserView] = useState(null);
     const { id } = useParams();
     const navigate = useNavigate();
@@ -88,6 +88,7 @@ function ViewUser({user}) {
 
     return (
         <div className="container">
+            {navTabs}
             &nbsp;
             &nbsp;
             {userView ? 

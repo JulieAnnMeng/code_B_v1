@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import { Link } from 'react-router-dom'
 
 
-function Login({logIn, errors}) {
+function Login({logIn, errors, navTabs}) {
     const blankFormData = {username: "", password: ""}
     const [formData, setFormData] = useState(blankFormData);    
 
@@ -18,7 +18,8 @@ function Login({logIn, errors}) {
     }
 
     return (
-        <div className='container'>
+        <div className='container'><br /><br /><br />
+            {navTabs}
             <h1 className='form-title'>Login</h1>
             &nbsp;
             <div className='container login-outside'>

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
 
 
-function DiscussionForm({user, startDiscussion, editUserDiscussion, board}) {
+function DiscussionForm({user, startDiscussion, editUserDiscussion, board, navTabs}) {
     const { id } = useParams();
     
     let discussionFormData = {user_id: user.id, topic: "", discussion: ""};
@@ -30,6 +30,7 @@ function DiscussionForm({user, startDiscussion, editUserDiscussion, board}) {
 
     return (
         <div className="container"><br />
+            {navTabs}<br />
             <h1 className='board'>Submit a Discussion Topic</h1>
             {user ?
             <>    

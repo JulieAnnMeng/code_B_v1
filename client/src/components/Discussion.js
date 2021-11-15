@@ -3,7 +3,7 @@ import { Link, useParams, useNavigate } from 'react-router-dom';
 import CommentBoard from './CommentBoard';
 
 
-function Discussion({user, addInterest, board}) {
+function Discussion({user, addInterest, board, navTabs}) {
     const { id } = useParams();
     const navigate = useNavigate();
 
@@ -77,7 +77,8 @@ function Discussion({user, addInterest, board}) {
 
 
         return (
-             <div className="container">
+             <div className="container"><br />
+                 {navTabs}
                 {discussion ?  
                     <>
                         &nbsp;

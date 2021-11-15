@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import { Link } from 'react-router-dom'
 
 
-function ProfileEdit({user, userEdit}) {
+function ProfileEdit({user, userEdit, navTabs}) {
     const blankFormData = {first_name: '', last_name: '', username: '', icon: '', password: '', new_password: '', new_password_confirmation: ''};
     const [formData, setFormData] = useState(blankFormData); 
     const [toggle, setToggle] = useState(false);
@@ -54,6 +54,7 @@ function ProfileEdit({user, userEdit}) {
 
     return (
         <div className='container'><br />
+        {navTabs}
         <br /><br /><h1 className='welcome'><Link to='/UserPage' className='icon'>{icon}</Link> Welcome {user.first_name + ' ' + user.last_name}</h1><br /><br />
         <h1 className='form-title'>Profile Edits</h1>
         <div className='container card edit-outside'>
