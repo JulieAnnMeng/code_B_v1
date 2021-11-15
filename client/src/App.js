@@ -238,7 +238,7 @@ function App() {
 
       <Routes>
         {/* <div> */}
-          <Route exact path="/" element={board ? <Home addInterest={addInterest} user={user} board={searchReturn ? searchReturn : board} /> : <div className="spinner-border text-info center container" role="status"><span className="visually-hidden">Loading...</span></div> } />
+          <Route exact path="/" element={board ? <Home addInterest={addInterest} user={user} logOut={logOut} board={searchReturn ? searchReturn : board} /> : <div className="spinner-border text-info center container" role="status"><span className="visually-hidden">Loading...</span></div> } />
             <Route exact path={user ? "/Logout": "/Login"} element={user ? null : <Login logIn={logIn} errors={errors} />} />
             <Route exact path={user ? "/ProfilePage" : "/Signup"} element={user? <ProfilePage user={user}/> : <Signup signUp={signUp} />} />
             <Route exact path={"/UserPage"} element={<UserPage user={user} getUser={getUser} />} />

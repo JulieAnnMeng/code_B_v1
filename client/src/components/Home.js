@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import Board from './Board'
 
-function Home({board, addInterest, user}) {
+function Home({board, addInterest, user, logOut}) {
 
     let discussion;
     let interestStar;
@@ -57,6 +57,21 @@ function Home({board, addInterest, user}) {
     
     return (
         <div className='container'>
+            <ul className="nav justify-content-end nav-pills" >
+                <li className="bttn">
+                    {user ? 
+                    <button className="btn btn-outline-success bttn" onClick={logOut} >Logout</button>
+                    :
+                    <Link to={"/Login"} className="btn btn-outline-success bttn"  id="navBar-bttn">Login</Link>}
+                </li>
+                &nbsp; &nbsp;
+                <li className="bttn">
+                    {user ? 
+                    <Link to={"/ProfilePage"} className="btn btn-outline-success bttn"  id="navBar-bttn" >👤</Link>
+                    :
+                    <Link to={"/Signup"} className="btn btn-outline-success bttn"  id="navBar-bttn" >Signup</Link>}
+                </li>
+            </ul>
             <div className='intro'>
 
                 <br /><br /><h1 className='welcome'> {user ? icon : null} Welcome to Code <span>B</span></h1>
