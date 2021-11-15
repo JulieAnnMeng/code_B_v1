@@ -27,15 +27,14 @@ function Navbar({user, board, setSearchReturn, logOut}) {
 
     return (
         <div>
-            <div className="navbar navbar-light bg-light" id="Navbar">
+            <div >
                 {/* <img src={banner} className="App-banner" alt="banner" /> */}
-                <div className="container-fluid">
+                <div>
                     {/* Navbar Home link */}
-                    <a href='/' className="navbar-brand" id="Navbar-title" >Code <span>B</span></a>
-                    <form className="d-flex" onSubmit={handleSearch}>
+                    <a href='/' >Code <span>B</span></a>
+                    <form onSubmit={handleSearch}>
                         <input 
                             id="search" 
-                            className="form-control me-2 bttn" 
                             type="search" 
                             placeholder="🔍 Search code_B" 
                             aria-label="Search" 
@@ -43,7 +42,7 @@ function Navbar({user, board, setSearchReturn, logOut}) {
                             value={search}
                             onChange={handleChange}
                         />
-                        <button className="btn btn-outline-success bttn" type="submit">Search</button>
+                        <button type="submit">Search</button>
                     </form>
                     {/* Navbar right links */}
                     <ul>
@@ -58,7 +57,7 @@ function Navbar({user, board, setSearchReturn, logOut}) {
                             {user ? 
                             <Link to={"/ProfilePage"} >👤</Link>
                             :
-                            <Link to={"/Signup"} ><button onClick={handleSignup}>Signup</button></Link>}
+                            <Link to={"/Signup"}><button onClick={handleSignup}>Signup</button></Link>}
                         </li>
                     </ul>
                 </div>    
