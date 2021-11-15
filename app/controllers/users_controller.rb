@@ -1,4 +1,4 @@
-class Api::UsersController < ApplicationController
+class UsersController < ApplicationController
     skip_before_action :authorize, only: [:create, :show, :update]
 
     def create

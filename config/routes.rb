@@ -5,7 +5,6 @@ Rails.application.routes.draw do
   # resources :users
    # post "/me", to: "sessions#create"
    
-  namespace :api do 
     get "/me" , to: "sessions#show"
     delete "/me", to: "sessions#destroy"
     post "/login", to: "sessions#create"
@@ -27,7 +26,6 @@ Rails.application.routes.draw do
     delete "/comments/:id", to: "comments#destroy"
     patch "/comments/:id", to: "comments#update"
     post "/comments", to: "comments#create"
-  end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
 end

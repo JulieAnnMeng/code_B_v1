@@ -21,21 +21,21 @@ function UserPage({user, getUser}) {
     function deleteTypeSwitch(type, id) {
         switch(type) {
             case 'interest':
-                fetch(`/api/interests/${id}`, {
+                fetch(`/interests/${id}`, {
                     method: 'DELETE'
                 })
                 .then(setUpdate(true))
                 .catch(err => console.log(err))
                 break;
             case 'discussion':
-                fetch(`/api/discussions/${id}`, {
+                fetch(`/discussions/${id}`, {
                     method: 'DELETE',
                 })
                 .then(setUpdate(true))
                 .catch(err => console.log(err))
                 break;
             case 'comment':
-                 fetch(`/api/comments/${id}`, {
+                 fetch(`/comments/${id}`, {
                     method: 'DELETE',
                 })
                 .then(setUpdate(true))

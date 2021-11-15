@@ -33,14 +33,14 @@ function App() {
   }, [loggedOn]);
   
   function getDiscussions() {
-    fetch("/api/discussions")
+    fetch("/discussions")
     .then((response) => response.json())
     .then((data) => setBoard(data))
     .catch((error) => setErrors(error))
   }
 
   function getUser() {
-    fetch("/api/me")
+    fetch("/me")
     .then((r) => {
       if (r.ok) {
         r.json().then((data) => {
@@ -53,7 +53,7 @@ function App() {
   }
 
   function logIn (data) {
-    fetch('/api/login',{
+    fetch('/login',{
       method: "POST",
       headers: {
         'Content-Type': 'application/json'
@@ -76,7 +76,7 @@ function App() {
   }
 
   function logOut() {
-		fetch("/api/logout", {
+		fetch("/logout", {
 			method: "DELETE",
 		}).then(() => {
       navigate("/");
@@ -86,7 +86,7 @@ function App() {
 	}
 
   function signUp (data) {
-    fetch('/api/signup',{
+    fetch('/signup',{
       method: "POST",
       headers: {
         'Content-Type': 'application/json'
@@ -109,7 +109,7 @@ function App() {
   }
 
   function addComment(data) {
-    fetch('/api/comments',{
+    fetch('/comments',{
       method: "POST",
       headers: {
         'Content-Type': 'application/json'
@@ -130,7 +130,7 @@ function App() {
   }
 
   function startDiscussion(data) {
-    fetch('/api/discussions',{
+    fetch('/discussions',{
       method: "POST",
       headers: {
         'Content-Type': 'application/json'
@@ -144,7 +144,7 @@ function App() {
 
   function userEdit(id, data){
     let updates = Object.fromEntries(Object.entries(data).filter(([_, v]) => v !== ''))
-    fetch(`/api/userEdit/${id}`,{
+    fetch(`/userEdit/${id}`,{
       method: "PATCH",
       headers: {
         'Content-Type': 'application/json'
@@ -165,7 +165,7 @@ function App() {
   }
 
   function addInterest (user_id, discussion_id) {
-    fetch(`/api/addInterest`,{
+    fetch(`/addInterest`,{
       method: "POST",
       headers: {
         'Content-Type': 'application/json'
@@ -189,7 +189,7 @@ function App() {
   }
 
   function editUserDiscussion(formData){
-    fetch(`/api/discussions/${formData.id}`,{
+    fetch(`/discussions/${formData.id}`,{
       method: "PATCH",
       headers: {
         'Content-Type': 'application/json'
@@ -213,7 +213,7 @@ function App() {
   }
 
   function editUserComment(formData) {
-    fetch(`/api/comments/${formData.id}`,{
+    fetch(`/comments/${formData.id}`,{
       method: "PATCH",
       headers: {
         'Content-Type': 'application/json'
@@ -237,7 +237,7 @@ function App() {
       <Navbar user={user} board={board} setSearchReturn={setSearchReturn} logOut={logOut} />
 
       <Routes>
-        <div>
+        {/* <div> */}
           <Route exact path="/" element={board ? <Home addInterest={addInterest} user={user} board={searchReturn ? searchReturn : board} /> : <div className="spinner-border text-info center container" role="status"><span className="visually-hidden">Loading...</span></div> } />
             <Route exact path={user ? "/Logout": "/Login"} element={user ? null : <Login logIn={logIn} errors={errors} />} />
             <Route exact path={user ? "/ProfilePage" : "/Signup"} element={user? <ProfilePage user={user}/> : <Signup signUp={signUp} />} />
@@ -252,7 +252,7 @@ function App() {
             <Route exact path={"/CommentForm/:id"} element={<CommentForm user={user} board={board} getDiscussions={getDiscussions} addComment={addComment} />} />
             <Route exact path={"/Discussion/:discussion_id/CommentForm/:id/"} element={<CommentForm user={user} getDiscussions={getDiscussions} board={board} editUserComment={editUserComment} />} />
             <Route exact path={"/ViewUser/:id"} element={<ViewUser user={user} />} />
-        </div>
+        {/* </div> */}
       </Routes>
       
       {/* <Footer /> */}
