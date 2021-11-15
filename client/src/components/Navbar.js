@@ -1,5 +1,5 @@
 import React, {useState}  from 'react';
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, Outlet } from 'react-router-dom'
 
 function Navbar({user, board, setSearchReturn, logOut}) {
     const navigate = useNavigate();
@@ -59,6 +59,7 @@ function Navbar({user, board, setSearchReturn, logOut}) {
                     </ul>
                 </div>    
             </nav>
+            <Outlet />
         </div>
     )
 }
