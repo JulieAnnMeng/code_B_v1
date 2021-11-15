@@ -61,7 +61,7 @@ function Home({board, addInterest, user, logOut}) {
             <div className='intro'>
 
                 <br /><br /><h1 className='welcome'> {user ? icon : null} Welcome to Code <span>B</span></h1>
-                <ul className="nav justify-content-end nav-pills" >
+                <ul>
                     <li>
                         {user ? 
                         <button onClick={logOut} >Logout</button>
