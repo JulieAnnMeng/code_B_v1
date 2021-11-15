@@ -1,6 +1,6 @@
 import './App.css';
-import { Routes, Route, useNavigate, Link } from 'react-router-dom'
-import React, { useState, useEffect, Outlet } from "react";
+import { Routes, Route, useNavigate, Link, Outlet } from 'react-router-dom'
+import React, { useState, useEffect } from "react";
 import Home from "./components/Home";
 import Navbar from './components/Navbar';
 import Login from "./components/Login";
@@ -255,6 +255,7 @@ function App() {
         {/* </div> */}
       </Routes>
       
+      <Outlet />
       {/* <Footer /> */}
     </div>
   );
