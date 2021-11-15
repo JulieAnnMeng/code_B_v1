@@ -22,7 +22,7 @@ function Navbar({user, board, setSearchReturn, logOut}) {
 
     return (
         <div>
-            <nav className="navbar navbar-light bg-light" id="Navbar">
+            <div className="navbar navbar-light bg-light" id="Navbar">
                 {/* <img src={banner} className="App-banner" alt="banner" /> */}
                 <div className="container-fluid">
                     {/* Navbar Home link */}
@@ -46,18 +46,18 @@ function Navbar({user, board, setSearchReturn, logOut}) {
                             {user ? 
                             <button className="btn btn-outline-success bttn" onClick={logOut} >Logout</button>
                             :
-                            <Link to="/Login" className="btn btn-outline-success bttn"  id="navBar-bttn">Login</Link>}
+                            <Link to={"/Login"} className="btn btn-outline-success bttn"  id="navBar-bttn">Login</Link>}
                         </li>
                         &nbsp; &nbsp;
                         <li className="bttn">
                             {user ? 
-                            <Link to="/ProfilePage" className="btn btn-outline-success bttn"  id="navBar-bttn" >👤</Link>
+                            <Link to={"/ProfilePage"} className="btn btn-outline-success bttn"  id="navBar-bttn" >👤</Link>
                             :
-                            <Link to="/Signup" className="btn btn-outline-success bttn"  id="navBar-bttn" >Signup</Link>}
+                            <Link to={"/Signup"} className="btn btn-outline-success bttn"  id="navBar-bttn" >Signup</Link>}
                         </li>
                     </ul>
                 </div>    
-            </nav>
+            </div>
         </div>
     )
 }
