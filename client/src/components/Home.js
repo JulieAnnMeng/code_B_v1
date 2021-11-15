@@ -61,21 +61,17 @@ function Home({board, addInterest, user, logOut}) {
             <div className='intro'>
 
                 <br /><br /><h1 className='welcome'> {user ? icon : null} Welcome to Code <span>B</span></h1>
-                <ul>
-                    <li>
-                        {user ? 
-                        <button onClick={logOut} >Logout</button>
-                        :
-                        <Link to={"/Login"}>Login</Link>}
-                    </li>
-                    &nbsp; &nbsp;
-                    <li>
-                        {user ? 
-                        <Link to={"/ProfilePage"} >👤</Link>
-                        :
-                        <Link to={"/Signup"} >Signup</Link>}
-                    </li>
-                </ul>
+
+                <div>
+                    <ul>
+                        <li>
+                            { user ? <button onClick={logOut} >Logout</button> : <Link to={"/Login"}>Login</Link> }
+                        </li>
+                        <li>
+                            { user ? <Link to={"/ProfilePage"} ><button>👤</button></Link> : <Link to={"/Signup"} ><button>Signup</button></Link> }
+                        </li>
+                    </ul>
+                </div>
 
                 {user ?
                     <Link to={`/DiscussionForm`} className="btn btn-primary btn-outline-success bttn discus-bttn"><br/>Start a discussion<br/></Link>

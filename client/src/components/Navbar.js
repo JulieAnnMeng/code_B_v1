@@ -20,6 +20,11 @@ function Navbar({user, board, setSearchReturn, logOut}) {
         navigate('/');
     }
 
+    function handleSignup(e){
+        e.preventDefault();
+        navigate('/Signup');
+    }
+
     return (
         <div>
             <div className="navbar navbar-light bg-light" id="Navbar">
@@ -46,14 +51,14 @@ function Navbar({user, board, setSearchReturn, logOut}) {
                             {user ? 
                             <button className="btn btn-outline-success bttn" onClick={logOut} >Logout</button>
                             :
-                            <Link to={"/Login"} className="btn btn-outline-success bttn"  id="navBar-bttn">Login</Link>}
+                            <a href="/Login" className="btn btn-outline-success bttn" >Login</a>}
                         </li>
                         &nbsp; &nbsp;
                         <li className="bttn">
                             {user ? 
-                            <Link to={"/ProfilePage"} className="btn btn-outline-success bttn"  id="navBar-bttn" >👤</Link>
+                            <Link to={"/ProfilePage"} className="btn btn-outline-success bttn"  >👤</Link>
                             :
-                            <Link to={"/Signup"} className="btn btn-outline-success bttn"  id="navBar-bttn" >Signup</Link>}
+                            <Link to={"/Signup"} className="btn btn-outline-success bttn" ><button onClick={handleSignup}>Signup</button></Link>}
                         </li>
                     </ul>
                 </div>    
