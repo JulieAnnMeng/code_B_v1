@@ -231,15 +231,16 @@ function App() {
 
   return (
     <div className="App">
-      
+
+      <Navbar user={user} board={board} setSearchReturn={setSearchReturn} logOut={logOut} />
     
       <Routes>
         
         <div>
           
           <Route exact path="/" element={board ? <Home addInterest={addInterest} user={user} board={searchReturn ? searchReturn : board} /> : <div className="spinner-border text-info center container" role="status"><span className="visually-hidden">Loading...</span></div> } />
-            <Route exact path={user ? "/Logout": "/Login"} element={user ? null : <Login logIn={logIn} errors={errors} />} />
-            <Route exact path={user ? "/ProfilePage" : "/Signup"} element={user? <ProfilePage user={user}/> : <Signup signUp={signUp} />} />
+            <Route path={user ? "/Logout": "/Login"} element={user ? null : <Login logIn={logIn} errors={errors} />} />
+            <Route path={user ? "/ProfilePage" : "/Signup"} element={user? <ProfilePage user={user}/> : <Signup signUp={signUp} />} />
             <Route exact path={"/UserPage"} element={<UserPage user={user} getUser={getUser} />} />
             {/* <Route exact path={"/UserPage/:id"} element={<UserPage user={user} />} /> */}
             <Route exact path={"/ProfileEdit"} element={<ProfileEdit user={user} userEdit={userEdit} />} />
@@ -254,7 +255,7 @@ function App() {
         </div>
       </Routes>
 
-      <Navbar user={user} board={board} setSearchReturn={setSearchReturn} logOut={logOut} />
+      
       
       
       {/* <Footer /> */}
