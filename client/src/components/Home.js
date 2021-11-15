@@ -101,7 +101,6 @@ function Home({board, addInterest, user, setSearchReturn, logOut}) {
                             <button className="btn btn-outline-success bttn" onClick={logOut} >Logout</button>
                             :
                             <Link to={`Login`} className="btn bttn">Login</Link>}
-                            <Outlet />
                         </li>
                         &nbsp; &nbsp;
                         <li>
@@ -110,18 +109,14 @@ function Home({board, addInterest, user, setSearchReturn, logOut}) {
                             :
                             // unable to get signup or login buttons to work on Heroku
                             <button to={`Signup`} className="btn btn-primary bttn" onClick={() => navigate(`Signup`)}>Signup</button> }
-                            <Outlet />
                         </li>
                     </ul>
                 </div>  
             </nav>  
-
             <Outlet />
+
             <div className='container'>
-                
-
                 <div className='intro'>
-
                     <br /><br /><h1 className='welcome'> {user ? icon : null} Welcome to Code <span>B</span></h1><br /><br />
                     {user ?
                         <Link to={`/DiscussionForm`} className="btn btn-primary btn-outline-success bttn discus-bttn"><br/>Start a discussion<br/></Link>

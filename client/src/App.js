@@ -252,7 +252,7 @@ function App() {
         
         <div>
           
-            <Route exact path="/" element={board ? <Home addInterest={addInterest} user={user} setSearchReturn={setSearchReturn} logOut={logOut} board={searchReturn ? searchReturn : board} /> : <div className="spinner-border text-info center container" role="status"><span className="visually-hidden">Loading...</span></div> } />
+            <Route exact path="/" element={board ? <Home addInterest={addInterest} user={user} setSearchReturn={setSearchReturn} logOut={logOut} board={searchReturn ? searchReturn : board} /> : <div className="spinner-border text-info center container" role="status"><span className="visually-hidden">Loading...</span></div> } >
             
 
             <Route exact path={"Login"} element={<Login logIn={logIn} errors={errors} />} />
@@ -272,7 +272,7 @@ function App() {
             <Route exact path={"/Discussion/:discussion_id/CommentForm/:id/"} element={<CommentForm user={user} getDiscussions={getDiscussions} board={board} editUserComment={editUserComment} />} />
             <Route exact path={"/ViewUser/:id"} element={<ViewUser user={user} />} />
           
-
+            </Route>
         </div>
       </Routes>
 
