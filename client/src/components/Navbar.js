@@ -46,19 +46,19 @@ function Navbar({user, board, setSearchReturn, logOut}) {
                         <button className="btn btn-outline-success bttn" type="submit">Search</button>
                     </form>
                     {/* Navbar right links */}
-                    <ul className="nav justify-content-end nav-pills" >
-                        <li className="bttn">
+                    <ul>
+                        <li>
                             {user ? 
-                            <button className="btn btn-outline-success bttn" onClick={logOut} >Logout</button>
+                            <button onClick={logOut} >Logout</button>
                             :
-                            <a href="/Login" className="btn btn-outline-success bttn" >Login</a>}
+                            <a href="/Login" >Login</a>}
                         </li>
                         &nbsp; &nbsp;
-                        <li className="bttn">
+                        <li>
                             {user ? 
-                            <Link to={"/ProfilePage"} className="btn btn-outline-success bttn"  >👤</Link>
+                            <Link to={"/ProfilePage"} >👤</Link>
                             :
-                            <Link to={"/Signup"} className="btn btn-outline-success bttn" ><button onClick={handleSignup}>Signup</button></Link>}
+                            <Link to={"/Signup"} ><button onClick={handleSignup}>Signup</button></Link>}
                         </li>
                     </ul>
                 </div>    
