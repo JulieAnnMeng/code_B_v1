@@ -62,21 +62,21 @@ function Home({board, addInterest, user, logOut}) {
 
                 <br /><br /><h1 className='welcome'> {user ? icon : null} Welcome to Code <span>B</span></h1>
                 <ul className="nav justify-content-end nav-pills" >
-                    <li className="bttn">
+                    <li>
                         {user ? 
-                        <button className="btn btn-outline-success bttn" onClick={logOut} >Logout</button>
+                        <button onClick={logOut} >Logout</button>
                         :
-                        <Link to={"/Login"} className="btn btn-outline-success bttn"  id="navBar-bttn">Login</Link>}
+                        <Link to={"/Login"}>Login</Link>}
                     </li>
                     &nbsp; &nbsp;
-                    <li className="bttn">
+                    <li>
                         {user ? 
-                        <Link to={"/ProfilePage"} className="btn btn-outline-success bttn"  id="navBar-bttn" >👤</Link>
+                        <Link to={"/ProfilePage"} >👤</Link>
                         :
-                        <Link to={"/Signup"} className="btn btn-outline-success bttn"  id="navBar-bttn" >Signup</Link>}
+                        <Link to={"/Signup"} >Signup</Link>}
                     </li>
                 </ul>
-                
+
                 {user ?
                     <Link to={`/DiscussionForm`} className="btn btn-primary btn-outline-success bttn discus-bttn"><br/>Start a discussion<br/></Link>
                 : null}<br />   
