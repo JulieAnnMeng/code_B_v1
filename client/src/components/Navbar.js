@@ -47,6 +47,7 @@ function Navbar({user, board, setSearchReturn, logOut}) {
                             <button className="btn btn-outline-success bttn" onClick={logOut} >Logout</button>
                             :
                             <Link to={`/Login`} className="btn bttn">Login</Link>}
+                            <Outlet />
                         </li>
                         &nbsp; &nbsp;
                         <li>
@@ -55,11 +56,11 @@ function Navbar({user, board, setSearchReturn, logOut}) {
                             :
                             // unable to get signup or login buttons to work on Heroku
                             <button to={`/Signup`} className="btn btn-primary bttn" onClick={() => navigate(`/Signup`)}>Signup</button> }
+                            <Outlet />
                         </li>
                     </ul>
                 </div>    
             </nav>
-            <Outlet />
         </div>
     )
 }
