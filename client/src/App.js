@@ -2,7 +2,7 @@ import './App.css';
 import { Routes, Route, useNavigate, Link } from 'react-router-dom'
 import React, { useState, useEffect, Outlet } from "react";
 import Home from "./components/Home";
-import Navbar from './components/Navbar';
+// import Navbar from './components/Navbar';
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import DiscussionCard from "./components/DiscussionCard";
@@ -247,48 +247,14 @@ function App() {
   return (
     <div className="App">
       {/* <Navbar user={user} board={board} setSearchReturn={setSearchReturn} logOut={logOut} /> */}
-      <nav className="navbar container-fluid" id="Navbar">
-              {/* Navbar Home link */}
-              <a href='/' id="Navbar-title" >Code <span>B</span></a>
-              <form className="d-flex" onSubmit={handleSearch}>
-                  <input 
-                      id="search" 
-                      className="form-control me-2 bttn" 
-                      type="search" 
-                      placeholder="🔍 Search code_B" 
-                      aria-label="Search" 
-                      name="search" 
-                      value={search}
-                      onChange={handleChange}
-                  />
-                  <button className="btn bttn" type="submit">Search</button>
-              </form>
-              {/* Navbar right links */}
-              <ul className="nav" >
-                  <li>
-                      {user ? 
-                      <button className="btn btn-outline-success bttn" onClick={logOut} >Logout</button>
-                      :
-                      <Link to={`/Login`} className="btn bttn">Login</Link>}
-                  </li>
-                  &nbsp; &nbsp;
-                  <li>
-                      {user ? 
-                      <Link to={`/ProfilePage`} className="btn bttn">👤</Link>
-                      :
-                      // unable to get signup or login buttons to work on Heroku
-                      <button to={`/Signup`} className="btn btn-primary bttn" onClick={() => navigate(`Signup`)}>Signup</button> }
-                  </li>
-              </ul>
-      </nav>
-      {/* <Outlet /> */}
-    
+   
       <Routes>
         
         <div>
           
             <Route exact path="/" element={board ? <Home addInterest={addInterest} user={user} setSearchReturn={setSearchReturn} logOut={logOut} board={searchReturn ? searchReturn : board} /> : <div className="spinner-border text-info center container" role="status"><span className="visually-hidden">Loading...</span></div> } />
             
+
             <Route exact path={"Login"} element={<Login logIn={logIn} errors={errors} />} />
             <Route exact path={"Logout"} element={null} />
             <Route path={user ? "ProfilePage" : "Signup"} element={user? <ProfilePage user={user}/> : <Signup signUp={signUp} />} />
@@ -305,6 +271,8 @@ function App() {
             <Route exact path={"/CommentForm/:id"} element={<CommentForm user={user} board={board} getDiscussions={getDiscussions} addComment={addComment} />} />
             <Route exact path={"/Discussion/:discussion_id/CommentForm/:id/"} element={<CommentForm user={user} getDiscussions={getDiscussions} board={board} editUserComment={editUserComment} />} />
             <Route exact path={"/ViewUser/:id"} element={<ViewUser user={user} />} />
+          
+
         </div>
       </Routes>
 
