@@ -32,14 +32,14 @@ function App() {
   }, [loggedOn]);
   
   function getDiscussions() {
-    fetch("/discussions")
+    fetch("/api/discussions")
     .then((response) => response.json())
     .then((data) => setBoard(data))
     .catch((error) => setErrors(error))
   }
 
   function getUser() {
-    fetch("/me")
+    fetch("/api/me")
     .then((r) => {
       if (r.ok) {
         r.json().then((data) => {
@@ -52,7 +52,7 @@ function App() {
   }
 
   function logIn (data) {
-    fetch('/login',{
+    fetch('/api/login',{
       method: "POST",
       headers: {
         'Content-Type': 'application/json'
@@ -75,7 +75,7 @@ function App() {
   }
 
   function logOut() {
-		fetch("/logout", {
+		fetch("/api/logout", {
 			method: "DELETE",
 		}).then(() => {
       navigate("/");
@@ -85,7 +85,7 @@ function App() {
 	}
 
   function signUp (data) {
-    fetch('/signup',{
+    fetch('/api/signup',{
       method: "POST",
       headers: {
         'Content-Type': 'application/json'
@@ -108,7 +108,7 @@ function App() {
   }
 
   function addComment(data) {
-    fetch('/comments',{
+    fetch('/api/comments',{
       method: "POST",
       headers: {
         'Content-Type': 'application/json'
@@ -129,7 +129,7 @@ function App() {
   }
 
   function startDiscussion(data) {
-    fetch('/discussions',{
+    fetch('/api/discussions',{
       method: "POST",
       headers: {
         'Content-Type': 'application/json'
@@ -143,7 +143,7 @@ function App() {
 
   function userEdit(id, data){
     let updates = Object.fromEntries(Object.entries(data).filter(([_, v]) => v !== ''))
-    fetch(`/userEdit/${id}`,{
+    fetch(`/api/userEdit/${id}`,{
       method: "PATCH",
       headers: {
         'Content-Type': 'application/json'
@@ -164,7 +164,7 @@ function App() {
   }
 
   function addInterest (user_id, discussion_id) {
-    fetch(`/addInterest`,{
+    fetch(`/api/addInterest`,{
       method: "POST",
       headers: {
         'Content-Type': 'application/json'
@@ -188,7 +188,7 @@ function App() {
   }
 
   function editUserDiscussion(formData){
-    fetch(`/discussions/${formData.id}`,{
+    fetch(`/api/discussions/${formData.id}`,{
       method: "PATCH",
       headers: {
         'Content-Type': 'application/json'
@@ -212,7 +212,7 @@ function App() {
   }
 
   function editUserComment(formData) {
-    fetch(`/comments/${formData.id}`,{
+    fetch(`/api/comments/${formData.id}`,{
       method: "PATCH",
       headers: {
         'Content-Type': 'application/json'

@@ -29,7 +29,7 @@ function ViewUser({user}) {
 
     function getUserView() {
         if (user === null || parseInt(id) !== user.id){
-            fetch(`/users/${id}`)
+            fetch(`/api/users/${id}`)
             .then((r) => r.json())
             .then((data) => setUserView(data))
             .catch((error) => console.log(error))

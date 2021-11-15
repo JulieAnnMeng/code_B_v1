@@ -117,7 +117,7 @@ function Home({board, addInterest, user, setSearchReturn, logOut}) {
             </nav>  
 
             <Outlet />
-            {/* <div className='container'>
+            <div className='container'>
                 
 
                 <div className='intro'>
@@ -134,7 +134,7 @@ function Home({board, addInterest, user, setSearchReturn, logOut}) {
                 &nbsp;
                 {discussion}
                 &nbsp; &nbsp;
-            </div> */}
+            </div>
         </div>
 
     )
