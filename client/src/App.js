@@ -262,7 +262,7 @@ function App() {
               <Route exact path={"UserPage"} element={<UserPage user={user} getUser={getUser} />} />
               {/* <Route exact path={"/UserPage/:id"} element={<UserPage user={user} />} /> */}
               
-              <Route path={"Board"} element={<Board user={user} board={board} addInterest={addInterest} />} />
+              <Route path={""} element={<Board user={user} board={board} addInterest={addInterest} />} />
               <Route exact path={"ProfileEdit"} element={<ProfileEdit user={user} userEdit={userEdit} />} />
               <Route exact path={"Discussion"} element={<Discussion user={user} board={board} addInterest={addInterest} />} />
               <Route exact path={"DiscussionCard"} element={<DiscussionCard  />} />

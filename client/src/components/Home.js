@@ -66,9 +66,8 @@ function Home({board, addInterest, user, setSearchReturn, logOut}) {
                 </div>  
             </nav>  
             <Outlet />
-            <Routes>
-                <Route path={"Board"} element={<Board user={user} board={board} addInterest={addInterest} />} />
-            </Routes>
+
+
         </div>
 
     )
