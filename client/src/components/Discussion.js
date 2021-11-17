@@ -20,37 +20,47 @@ function Discussion({user, addInterest, board}) {
 
     if(board){  
         discussion = board.find(discussion => discussion.id === parseInt(id));
-        interestCount = discussion.interests.length;
-        commentAvailable = `${discussion.comments.length} comments below. Join the discussion!`;
-        if(discussion.user.icon){
-            commentorIcon = discussion.user.icon;
+        if (discussion){
+            interestCount = discussion.interests.length;
+            commentAvailable = `${discussion.comments.length} comments below. Join the discussion!`;
+            
+            if(discussion.user.icon){
+                commentorIcon = <Link to={`/ViewUser/${discussion.user.id}`}><img src={discussion.user.icon} alt="usericon" className='icon-img-small'/></Link>;
+            } else {
+                commentorIcon = <Link to={`/ViewUser/${discussion.user.id}`} className='small-icon'>{discussion.user.first_name.charAt(0) + discussion.user.last_name.charAt(0)}</Link>
+            }
+            let comments; 
+
+            if(discussion.comments){
+                comments = discussion.comments;
+                commentBoard = comments.map(entry => {
+                return (
+                    <CommentBoard 
+                        key={entry.id}
+                        id={entry.id}
+                        logOn={user}
+                        comment={entry.comment}
+                        commentor={entry.commentor}
+                    />
+                )})
+            } else {
+                commentAvailable = 'No comments available';
+                commentBoard = null;
+            }
         } else {
-            commentorIcon = discussion.user.first_name.charAt(0) + discussion.user.last_name.charAt(0);
-        }
-        let comments; 
-        if(discussion.comments){
-            comments = discussion.comments;
-            commentBoard = comments.map(entry => {
-            return (
-                <CommentBoard 
-                    key={entry.id}
-                    id={entry.id}
-                    logOn={user}
-                    comment={entry.comment}
-                    commentor={entry.commentor}
-                />
-            )})
-        } else {
-            commentAvailable = 'No comments available';
-            commentBoard = null;
+            <div className="spinner-border text-info center container" role="status">
+                <span className="visually-hidden">
+                    Loading...
+                </span>
+            </div>
         }
     }
 
     if (user) {
         if(user.icon){
-            icon = user.icon;
+            icon = <Link to='/UserPage' className='icon discus-page'><img src={user.icon} alt="usericon" className='icon-img'/></Link>;
         } else {
-            icon = <Link to='/UserPage' className='icon'>{user.first_name.charAt(0) + user.last_name.charAt(0)}</Link>;
+            icon = <Link to='/UserPage' className='icon discus-page'>{user.first_name.charAt(0) + user.last_name.charAt(0)}</Link>;
         }
         interestStar = user.userPage.interests.find(interest => interest.discussion_id === parseInt(id)) ? true : false;
         tableHeader = commentAvailable
@@ -80,21 +90,19 @@ function Discussion({user, addInterest, board}) {
              <div className="container">
                 {discussion ?  
                     <>
-                        &nbsp;
                         <br /><br />
-                        <h1 className='board discus-title'>
+                        <h1 className='discus-title'>
                             {user ? icon : null} 
                             {discussion.topic}
                         {user ?
-                            <Link to={`/DiscussionForm`} className="btn bttn discus-bttn">
+                            <Link to={`/DiscussionForm`} className="btn bttn discus-bttn discus-page">
                                 <br/>Start a discussion<br/>
                             </Link>
                         : null}
-                        </h1><br /><br />
-                        &nbsp;               
-                        <div className="card container">
-                            <p>{discussion.discussion}</p>
-                            <p><Link to={`/ViewUser/${discussion.user.id}`} className='small-icon'>{commentorIcon}</Link> {discussion.user.username}</p>  
+                        </h1><br />              
+                        <div className="card"><br />
+                            <p className="txt">{discussion.discussion}</p>
+                            <p>{commentorIcon}<span>{discussion.user.username}</span></p>  
                             &nbsp;  
                             <div className="d-grid gap-2 d-md-block">
                                 <button className="btn bttn2" onClick={handleInterest}>{ interestStar ? " ★ " : " ☆ " }<span className="badge bg-secondary">{interestCount}</span> Interests</button>
@@ -113,7 +121,7 @@ function Discussion({user, addInterest, board}) {
                                     <tbody>
                                         <tr>
                                             <th>{tableHeader}</th>
-                                            <td className="d-grid gap-2 d-md-flex justify-content-md-end">
+                                            <td className="gap-2 d-md-flex justify-content-md-end">
                                                 {user ?
                                                 <Link to={`/CommentForm/${id}`} className="btn btn-primary bttn2">Comment</Link>
                                                 :
@@ -125,9 +133,9 @@ function Discussion({user, addInterest, board}) {
                                             </td>
                                         </tr>
                                     </tbody>
-                                </table><br /><br />                       
-                            {commentBoard} 
-                            </div>
+                                </table><br /><br />                 
+                            </div><br /> 
+                            {commentBoard}
                         </div>
                     </>
                 : 

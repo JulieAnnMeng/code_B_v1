@@ -7,6 +7,7 @@ function DiscussionCard({user, addInterest, interestStar, id, topic, discussion,
     
     function handleInterest(e) {
         e.preventDefault();
+        interestStar = true;
         if(user) {
             let notAlreadyInterested = interests.find(interest => interest.discussion_id === id) ? false : true;
             if (notAlreadyInterested){
@@ -25,8 +26,8 @@ function DiscussionCard({user, addInterest, interestStar, id, topic, discussion,
         return (
             <div className="card"><br/>
                 <Link to={`/Discussion/${id}`} className="title"  > {topic} </Link><br/>
-                <p>{discussion}</p>
-                <p> <Link to={`/ViewUser/${entryUserID}`} className='small-icon'>{icon}</Link> {username}                
+                <p className="txt">{discussion}</p>
+                <p> {icon} <span>{username}</span>                
                 </p>
                 <div className="d-grid gap-2 d-md-block">
                     <button className="btn btn-primary bttn2" onClick={handleInterest} >{interestStar ? " ★ " : " ☆ " } <span className="badge bg-secondary">{interestCount}</span> Interests</button>

@@ -6,7 +6,7 @@ function Board({id, username, addInterest, topic, discussion, icon, user, commen
     let commentCount = comments.length;
 
         return (
-            <div className="card" id={id}>
+            <div id={id}>
                 <DiscussionCard 
                     key={id}
                     id={id}

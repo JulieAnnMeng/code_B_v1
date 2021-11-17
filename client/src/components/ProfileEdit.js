@@ -12,9 +12,9 @@ function ProfileEdit({user, userEdit}) {
 
     if(user) {
         if(user.icon){
-            icon = user.icon;
+            icon = <Link to='/UserPage' className='icon'><img src={user.icon} alt="usericon" className='icon-img'/></Link>;
         } else {
-            icon = user.first_name.charAt(0) + user.last_name.charAt(0);
+            icon = <Link to='/UserPage' className='icon'>{user.first_name.charAt(0) + user.last_name.charAt(0)}</Link>;
         }
     }
 
@@ -40,8 +40,7 @@ function ProfileEdit({user, userEdit}) {
             passwordMatch();
         } 
         else {
-            passwordMatch()     
-            debugger;      
+            passwordMatch()        
             userEdit(user.id, formData);
             setFormData("");
         }   
@@ -53,11 +52,17 @@ function ProfileEdit({user, userEdit}) {
     }
 
     return (
-        <div className='container'><br />
-        <br /><br /><h1 className='welcome'><Link to='/UserPage' className='icon'>{icon}</Link> Welcome {user.first_name + ' ' + user.last_name}</h1><br /><br />
-        <h1 className='form-title'>Profile Edits</h1>
-        <div className='container card edit-outside'>
-            <div className='container edit-inside'>
+        <div><br />
+            <h1 className='welcome'> 
+                {icon} 
+                <em className="welcome-2">Welcome {user.first_name + ' ' + user.last_name}</em>
+                <Link to={`/DiscussionForm`} className="btn bttn discus-bttn">
+                    <br />Start a discussion<br />
+                </Link>
+            </h1><br />
+        <h1 className='form-title2'>Profile Edits</h1><br />
+        <div className='container outside'>
+            <div className='container inside'>
                 <br /><h1 className='form-type-title'>Personal Information: </h1><br />
                 &nbsp;
                 <form className='container edit-form right' onSubmit={handleSubmit}>
@@ -144,7 +149,7 @@ function ProfileEdit({user, userEdit}) {
                     </div>
                     &nbsp;
                     <div className="submit d-grid gap-2 d-md-block">
-                        <button type="submit" className="btn btn-primary bttn">Update</button>
+                        <button type="submit" className="btn btn-primary password-bttn bttn">Update</button>
                         &nbsp; &nbsp;
                         <button className="btn btn-primary password-bttn bttn" onClick={handleToggle}> {toggle ? "Nevermind" : "Change Password"} </button>                    
                     </div>

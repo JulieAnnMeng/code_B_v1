@@ -19,16 +19,15 @@ function Login({logIn, errors}) {
 
     return (
         <div className='container'>
-            <h1 className='form-title'>Login</h1>
-            &nbsp;
-            <div className='container login-outside'>
-                <div className='container login-inside'>
+            <br /><h1 className='form-title'>Login</h1><br /><br />
+            <div className='container outside'><br />
+                <div className='container inside'>
                     &nbsp;
-                    <form className='container login-form' onSubmit={handleSubmit}>
+                    <form className='container form' onSubmit={handleSubmit}>
                         <div className='fields'>
                             <div className="row g-3 align-items-center">
                                 <div className="col-auto">
-                                    <label className="col-form-label login-label"><span>Username</span></label>
+                                    <label className="col-form-label label"><span>Username</span></label>
                                 </div>
                                 <div className="col-auto">
                                     <input 
@@ -46,7 +45,7 @@ function Login({logIn, errors}) {
                             &nbsp; &nbsp;
                             <div className="row g-3 align-items-center">
                                 <div className="col-auto">
-                                    <label className="col-form-label login-label"><span> Password  </span></label>
+                                    <label className="col-form-label label"><span> Password  </span></label>
                                 </div>
                                 <div className="col-auto ">
                                     <input 
@@ -65,9 +64,9 @@ function Login({logIn, errors}) {
                         </div>
                         &nbsp;
                         <div className="submit d-grid gap-2 d-md-block">
-                            <button type="submit" className="btn btn-primary bttn">Login</button>
+                            <button type="submit" className="btn btn-primary bttn bttn2">Login</button>
                             &nbsp; &nbsp;
-                            <Link to="/signup" className="btn btn-primary bttn"><p className="signup-link">Signup</p></Link>
+                            <Link to="/signup" className="btn btn-primary bttn bttn2"><p className="signup-link">Signup</p></Link>
                         </div>
                     </form>
                     {/* ask Chaim or Billy on how to do pop up error messages. Setup validations for all forms */}

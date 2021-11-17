@@ -95,7 +95,7 @@ function App() {
         r.json().then((data) => {
           setUser(data);
           setLoggedOn(true)
-          navigate('/UserPage');
+          navigate('/Home');
         });
       } 
       else {
@@ -127,6 +127,7 @@ function App() {
   }
 
   function startDiscussion(data) {
+    let newId;
     fetch('/discussions',{
       method: "POST",
       headers: {
@@ -135,7 +136,11 @@ function App() {
       body: JSON.stringify(data)
     })
     .then((r) => r.json())
-    .then(discussion => navigate (`/Discussion/${discussion.id}`))
+    .then(discussion => {
+      newId = discussion.id;
+      getDiscussions();
+      navigate (`/Discussion/${newId}`);
+    })
     .catch(error => console.log("Log in incorrect: ", error))
   }
 
@@ -204,12 +209,13 @@ function App() {
       else {
         r.json().then((err) => setErrors(err.errors));
       }
-      navigate(`/UserPage`);
+      getDiscussions();
+      navigate(`/Discussion/${formData.id}`);
     })
     .catch(error => console.log("Log in incorrect: ", error))
   }
 
-  function editUserComment(formData) {
+  function editUserComment(formData, discussion_id) {
     fetch(`/comments/${formData.id}`,{
       method: "PATCH",
       headers: {
@@ -224,7 +230,8 @@ function App() {
       else {
         r.json().then((err) => setErrors(err.errors));
       }
-      navigate(`/UserPage`);
+      getDiscussions();
+      navigate(`/Discussion/${discussion_id}`);
     })
     .catch(error => console.log("Log in incorrect: ", error))
   }

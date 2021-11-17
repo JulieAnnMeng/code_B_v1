@@ -17,7 +17,7 @@ function ViewUser({user}) {
 
     if(user) {
         if(user.icon){
-            icon = user.icon;
+            icon = <Link to='/UserPage' className='icon'><img src={user.icon} alt="usericon" className='icon-img'/></Link>;
         } else {
             icon = <Link to='/UserPage' className='icon'>{user.first_name.charAt(0) + user.last_name.charAt(0)}</Link>;
         }
@@ -87,43 +87,30 @@ function ViewUser({user}) {
     }
 
     return (
-        <div className="container">
-            &nbsp;
-            &nbsp;
+        <>
             {userView ? 
             <>
-                <div className="card container">
-                <br /><br /><h1 className='welcome'> {user ? icon : null} Welcome to Code <span>B</span></h1><br /><br />
-                    <br /><h1 className="welcome-2">{userViewIcon} {userView.username}'s Info Page</h1><br />
-                </div>
-                &nbsp;
+                <h1 className="welcome"><br />
+                    {user ? icon : null} 
+                    <em className="welcome-2">{userView.username}'s Info Page</em>
                 {user ?
-                <div className="d-grid gap-2 d-md-flex justify-content-md-center">
-                    <Link to={`/DiscussionForm`} className="btn btn-primary btn-outline-success bttn me-2"><br/>Start a discussion<br/></Link>
-                </div>
+                <Link to={`/DiscussionForm`} className="btn btn-primary discus-bttn bttn me-2"><br/>Start a discussion<br/></Link>
                 :
                 null}
-                
-                &nbsp;
-                <div className="card container"><br />
+                </h1> 
+                <div className="container" style={{display: discussion[0] ? "block" : "none"}}>
                     <h2 className='board'>Started Discussions</h2><br />
-                    <div className="container">
-                        {discussion}
-                    </div>
+                    {discussion}
                 </div>
-                &nbsp;
-                <div className="card container"><br />
+                <div className="container" style={{display: comment[0] ? "block" : "none"}}>
                     <h2 className='board'>Comments</h2><br />
-                    <div className="container">
-                        {comment}
-                    </div>
+                    {comment}
                 </div>
             </>
             :
             <div className="spinner-border text-info center container" role="status"><span className="visually-hidden">Loading...</span></div>
             }
-            
-        </div>
+        </>
     )
 }
 

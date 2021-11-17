@@ -19,16 +19,16 @@ function Signup({signUp}) {
     }
 
     return (
-        <div className='container'>
-        <h1 className='form-title'>Signup</h1>
+        <div className='container'><br />
+        <h1 className='form-title'>Signup</h1><br />
         &nbsp;
-        <div className='container signup-outside'>
-            <div className='container signup-inside'>
+        <div className='container outside'>
+            <div className='container inside'>
                 <h1 className='form-type-title'>Personal Information: </h1>
                 &nbsp;
-                <form className='container signup-form right' onSubmit={handleSubmit}>
+                <form className='container form right' onSubmit={handleSubmit}>
                     <div className="row mb-3">
-                        <label className="col-sm-2 col-form-label signup-label signup-label"><span>Firstname</span></label>
+                        <label className="col-sm-2 col-form-label label"><span>Firstname</span></label>
                         <div className="col-sm-10 signup-input">
                             <input 
                                 id="firstname-signup" 
@@ -43,7 +43,7 @@ function Signup({signUp}) {
                     </div>
                     &nbsp;
                     <div className="row mb-3">
-                        <label className="col-sm-2 col-form-label signup-label"><span>Lastname</span></label>
+                        <label className="col-sm-2 col-form-label label"><span>Lastname</span></label>
                         <div className="col-sm-10 signup-input">
                             <input 
                                 id="lastname-signup"
@@ -58,7 +58,7 @@ function Signup({signUp}) {
                     </div>
                     &nbsp; 
                     <div className="row mb-3">
-                        <label className="col-sm-2 col-form-label signup-label"><span>Username</span></label>
+                        <label className="col-sm-2 col-form-label label"><span>Username</span></label>
                         <div className="col-sm-10 signup-input">
                             <input 
                                 id="username-signup"
@@ -73,7 +73,7 @@ function Signup({signUp}) {
                     </div>
                     &nbsp;
                     <div className="row mb-3">
-                        <label className="col-sm-2 col-form-label signup-label"><span>Password</span></label>
+                        <label className="col-sm-2 col-form-label label"><span>Password</span></label>
                         <div className="col-sm-10 signup-input">
                             <input 
                                 id="password-signup" 
@@ -88,7 +88,7 @@ function Signup({signUp}) {
                     </div>
                     &nbsp;
                     <div className="row mb-3">
-                        <label className="col-sm-2 col-form-label signup-label"><span>Password Confirmation</span></label>
+                        <label className="col-sm-2 col-form-label label"><span>Password Confirmation</span></label>
                         <div className="col-sm-10 signup-input">
                             <input 
                                 id="password-confirmation-signup" 
@@ -102,7 +102,7 @@ function Signup({signUp}) {
                         </div>
                     </div>
                     <div className="signup-btn">
-                        <button type="submit" className="btn btn-primary center bttn">Signup</button>
+                        <button type="submit" className="center bttn bttn2">Signup</button>
                     </div>
                 </form>
             </div>

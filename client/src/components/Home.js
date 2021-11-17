@@ -11,15 +11,16 @@ function Home({board, addInterest, user}) {
 
     if(user) {
         if(user.icon){
-            icon = user.icon;
+            icon = <Link to='/UserPage' className='icon'><img src={user.icon} alt="usericon" className='icon-img'/></Link>;
         } else {
             icon = <Link to='/UserPage' className='icon'>{user.first_name.charAt(0) + user.last_name.charAt(0)}</Link>;
         }
     }
 
-    // if(board){
+    if(board){
         discussion = board.map(entry => {
             let commentorIcon;
+            let entryUserID = entry.user.id;
 
             if (user) {
                 interestStar = user.userPage.interests.find(interest => interest.discussion_id === entry.id) ? true : false;
@@ -31,9 +32,9 @@ function Home({board, addInterest, user}) {
             }
 
             if(entry.user.icon){
-                commentorIcon = entry.user.icon;
+                commentorIcon = <Link to={`/ViewUser/${entryUserID}`}><img src={entry.user.icon} alt="usericon" className='icon-img-small'/></Link>;
             } else {
-                commentorIcon = entry.user.first_name.charAt(0) + entry.user.last_name.charAt(0);
+                commentorIcon = <Link to={`/ViewUser/${entryUserID}`} className='small-icon'>{entry.user.first_name.charAt(0) + entry.user.last_name.charAt(0)}</Link>;
             }
 
             return (
@@ -53,23 +54,25 @@ function Home({board, addInterest, user}) {
                     entryUserID={entry.user.id}
                 />
             )
-        })    
+        })
+    }    
     
     return (
-        <div className='container'>
+        <div>
             <div className='intro'>
-                <br /><br /><h1 className='welcome'> {user ? icon : null} Welcome to Code <span>B</span>{user ?
+                <br /><br /><h1 className='welcome'> {user ? icon : null} <em className="welcome-2">Welcome to Code <span>B</span></em>{user ?
                     <Link to={`/DiscussionForm`} className="btn btn-primary bttn discus-bttn"><br/>Start a discussion<br/></Link>
                 : null}</h1>
-                <br />   
-                <br /><p className='info'>
+                <br />
+                <p className='info txt'>
                     A forum for all coding discussions, where users can interact with each other and continue their education in programming.
-                </p><br/>
+                </p>
             </div>
-            <h2 className='board'>Discussion Board</h2>
-            &nbsp;
-            {discussion}
-            &nbsp; &nbsp;
+            <div className='container'>
+                <h2 className='board'>Discussion Board</h2>
+                {discussion}
+                <br />
+            </div>
         </div>
     )
 }

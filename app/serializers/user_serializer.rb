@@ -1,5 +1,5 @@
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :username, :first_name, :last_name, :userPage, :profilePage
+  attributes :id, :username, :first_name, :last_name, :icon, :userPage, :profilePage
 
   def userPage 
     userInterests = object.interests.map do |interest| 

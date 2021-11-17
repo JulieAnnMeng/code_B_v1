@@ -22,7 +22,7 @@ class CommentsController < ApplicationController
     def update
         comment = Comment.find(params[:id])
         if comment.update(comment_params)
-            render json: selection, status: :created
+            render json: comment, status: :created
         else
             render json: {errors: comment.errors}, status: :unauthorized
         end

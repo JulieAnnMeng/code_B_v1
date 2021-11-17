@@ -19,7 +19,6 @@ class UsersController < ApplicationController
     def update
         user = User.find(params[:id])
         if user&.authenticate(params[:password])
-            # byebug
             if params[:new_password]
                 if params[:new_password] == params[:new_password_confirmation]
                     if user.update(password: params[:new_password])
@@ -46,6 +45,6 @@ class UsersController < ApplicationController
 
     private
     def user_params
-        params.permit(:id, :user, :first_name, :last_name, :username, :password, :password_confirmation, :new_password, :new_password_confirmation)
+        params.permit(:id, :user, :first_name, :last_name, :username, :password, :password_confirmation, :new_password, :new_password_confirmation, :icon)
     end
 end

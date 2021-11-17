@@ -115,43 +115,35 @@ function UserPage({user, getUser}) {
 
     if (user){
         if(user.icon){
-            icon = user.icon;
+            icon = <Link to='/UserPage' className='icon'><img src={user.icon} alt="usericon" className='icon-img'/></Link>;
         } else {
             icon = <Link to={`/ViewUser/${user.id}`} className='icon'>{user.first_name.charAt(0) + user.last_name.charAt(0)}</Link>;
         }
     } else {getUser()}
 
     return (
-        <div className="container"><br /><br />
+        <div>
             {user ?  <>
-            <h1 className='welcome discus-title'> 
+            <h1 className='welcome'><br />
                     {icon} 
-                Welcome {user.first_name + ' ' + user.last_name} 
+                    <em className="welcome-2">Welcome {user.first_name + ' ' + user.last_name}</em> 
                 <Link to={`/DiscussionForm`} className="btn bttn discus-bttn">
                     <br />Start a discussion<br />
-                </Link><br /><br />
+                </Link>
             </h1>
-            <br /><br />
-                &nbsp;
-                <div className="card container"><br />
-                    <h2 className='board'>Interested Discussions</h2><br />
-                    <div className="container">
-                        {interested}
-                    </div>
+                <div className="container" style={{display: interested[0] ? "block" : "none"}}>
+                    <h2 className='board'>Interested Discussions</h2>
+                    {interested}
                 </div>
                 &nbsp;
-                <div className="card container"><br />
-                    <h2 className='board'>Started Discussions</h2><br />
-                    <div className="container">
-                        {discussion}
-                    </div>
+                <div className="container" style={{display: discussion[0] ? "block" : "none"}}>
+                    <h2 className='board'>Started Discussions</h2>
+                    {discussion}
                 </div>
                 &nbsp;
-                <div className="card container"><br />
-                    <h2 className='board'>Comments</h2><br />
-                    <div className="container">
-                        {comment}
-                    </div>
+                <div className="container" style={{display: comment[0] ? "block" : "none"}}>
+                    <h2 className='board'>Comments</h2>
+                    {comment}
                 </div>
             </>
             :

@@ -31,7 +31,7 @@ function UserCard({user, id, interest_id, discussion_id, type, topic, discussion
                 <div className="card">
                     {/* <h1 className="title">{topic}</h1> */}
                     <Link to={`/Discussion/${id}`} className="title" > {topic} </Link> <br />
-                    <p>{discussion}</p>
+                    <p className="txt">{discussion}</p>
                     <p><span>Date created/updated: </span>{date}</p>
                     {user === 'user' ? (
                         <div className="d-grid gap-2 d-md-block">
@@ -45,9 +45,9 @@ function UserCard({user, id, interest_id, discussion_id, type, topic, discussion
                 <div className="card">
                     {/* <h1 className="title">{topic}</h1> */}
                     <Link to={`/Discussion/${discussion_id}`} className="title" > {topic} </Link><br />
-                    <p>{discussion}</p>
-                    <div className="card container">
-                        <p>{comment}</p>
+                    <p className="txt">{discussion}</p>
+                    <div className="card card2 container">
+                        <p className="txt">{comment}</p>
                         <p><span>Date created/updated: </span>{date}</p>
                         {user === 'user' ? (
                             <div className="d-grid gap-2 d-md-block">
