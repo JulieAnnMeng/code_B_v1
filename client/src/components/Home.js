@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import Board from './Board'
 
 function Home({board, addInterest, user}) {
-
+    
     let discussion;
     let interestStar;
     let interests;
@@ -26,15 +26,19 @@ function Home({board, addInterest, user}) {
                 interestStar = user.userPage.interests.find(interest => interest.discussion_id === entry.id) ? true : false;
                 interests = user.userPage.interests;
                 
+                if(entry.user.icon){
+                    commentorIcon = <Link to={`/ViewUser/${entryUserID}`}><img src={entry.user.icon} alt="usericon" className='icon-img-small'/></Link>;
+                } else {
+                    commentorIcon = <Link to={`/ViewUser/${entryUserID}`} className='small-icon'>{entry.user.first_name.charAt(0) + entry.user.last_name.charAt(0)}</Link>;
+                }
             } else {
                 interestStar = null;
                 interests = null;
-            }
-
-            if(entry.user.icon){
-                commentorIcon = <Link to={`/ViewUser/${entryUserID}`}><img src={entry.user.icon} alt="usericon" className='icon-img-small'/></Link>;
-            } else {
-                commentorIcon = <Link to={`/ViewUser/${entryUserID}`} className='small-icon'>{entry.user.first_name.charAt(0) + entry.user.last_name.charAt(0)}</Link>;
+                if(entry.user.icon){
+                    commentorIcon = <Link to={`/Login`}><img src={entry.user.icon} alt="usericon" className='icon-img-small'/></Link>;
+                } else {
+                    commentorIcon = <Link to={`/Login`} className='small-icon'>{entry.user.first_name.charAt(0) + entry.user.last_name.charAt(0)}</Link>;
+                }
             }
 
             return (

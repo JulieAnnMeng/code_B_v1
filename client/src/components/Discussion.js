@@ -4,8 +4,11 @@ import CommentBoard from './CommentBoard';
 
 
 function Discussion({user, addInterest, board}) {
+
     const { id } = useParams();
     const navigate = useNavigate();
+
+    // add useEffect to grab discussions
 
     let commentAvailable;
     let commentAlert = "Login or signup to participate";
@@ -23,11 +26,18 @@ function Discussion({user, addInterest, board}) {
         if (discussion){
             interestCount = discussion.interests.length;
             commentAvailable = `${discussion.comments.length} comments below. Join the discussion!`;
-            
-            if(discussion.user.icon){
-                commentorIcon = <Link to={`/ViewUser/${discussion.user.id}`}><img src={discussion.user.icon} alt="usericon" className='icon-img-small'/></Link>;
+            if(user){
+                if(discussion.user.icon){
+                    commentorIcon = <Link to={`/ViewUser/${discussion.user.id}`}><img src={discussion.user.icon} alt="usericon" className='icon-img-small'/></Link>;
+                } else {
+                    commentorIcon = <Link to={`/ViewUser/${discussion.user.id}`} className='small-icon'>{discussion.user.first_name.charAt(0) + discussion.user.last_name.charAt(0)}</Link>
+                }
             } else {
-                commentorIcon = <Link to={`/ViewUser/${discussion.user.id}`} className='small-icon'>{discussion.user.first_name.charAt(0) + discussion.user.last_name.charAt(0)}</Link>
+                if(discussion.user.icon){
+                    commentorIcon = <Link to={`/Login`}><img src={discussion.user.icon} alt="usericon" className='icon-img-small'/></Link>;
+                } else {
+                    commentorIcon = <Link to={`/Login`} className='small-icon'>{discussion.user.first_name.charAt(0) + discussion.user.last_name.charAt(0)}</Link>
+                }
             }
             let comments; 
 
@@ -38,7 +48,7 @@ function Discussion({user, addInterest, board}) {
                     <CommentBoard 
                         key={entry.id}
                         id={entry.id}
-                        logOn={user}
+                        user={user}
                         comment={entry.comment}
                         commentor={entry.commentor}
                     />

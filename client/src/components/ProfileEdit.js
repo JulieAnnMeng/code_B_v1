@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 
 
 function ProfileEdit({user, userEdit}) {
+
     const blankFormData = {first_name: '', last_name: '', username: '', icon: '', password: '', new_password: '', new_password_confirmation: ''};
     const [formData, setFormData] = useState(blankFormData); 
     const [toggle, setToggle] = useState(false);

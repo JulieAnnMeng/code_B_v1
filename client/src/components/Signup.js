@@ -3,6 +3,7 @@ import React, {useState} from 'react'
 
 
 function Signup({signUp}) {
+
     const blankFormData = {first_name: "", last_name: "", username: "", password: "", password_confirmation: ""}
     const [formData, setFormData] = useState(blankFormData);    
 

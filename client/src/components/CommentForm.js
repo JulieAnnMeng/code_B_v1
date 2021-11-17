@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 
 
 function CommentForm({user, addComment, editUserComment, board}) {
+
     const { discussion_id, id } = useParams();
 
     let commentFormData;

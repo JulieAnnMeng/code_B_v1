@@ -334,7 +334,8 @@ div.col-sm-10.signup-input {
 }
 
 .submit {
-  padding: 0px 0px 0px 270px;
+  /* padding: 0px 0px 0px 270px; */
+  text-align: center;
 }
 
 .signup-link {

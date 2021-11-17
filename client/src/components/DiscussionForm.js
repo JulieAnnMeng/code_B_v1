@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom'
 
 
 function DiscussionForm({user, startDiscussion, editUserDiscussion, board}) {
+
     const { id } = useParams();
     let icon;
     

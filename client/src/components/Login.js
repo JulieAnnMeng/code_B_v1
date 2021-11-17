@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 
 
 function Login({logIn, errors}) {
+
     const blankFormData = {username: "", password: ""}
     const [formData, setFormData] = useState(blankFormData);    
 

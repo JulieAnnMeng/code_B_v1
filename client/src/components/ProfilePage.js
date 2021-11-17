@@ -41,7 +41,7 @@ function ProfilePage({user}) {
                             <div className="inside" style={{height: 319}}>
                             {/* change to */}
                                 <p className="txt"><span>Name: </span>{user.first_name} {user.last_name}</p><br />
-                                <p className="txt"><span>Username: </span>{user.username}</p><br /><br />
+                                <p className="txt"><span>Username: </span>{user.username}</p><br />
                                 <p className="txt"><span>Icon:  </span>{iconSmall}</p><br />
                                 <p className="txt"><span>Password: </span>**********</p>
                             </div>
@@ -49,9 +49,9 @@ function ProfilePage({user}) {
                         <div className="col">
                             <h3 className="profile-title">Personal Stats</h3><br />
                             <div className="inside" style={{height: 319}}>
-                                <p className="txt"><span>Discussions: </span>{user.profilePage.discussion}</p>
-                                <p className="txt"><span>Comments: </span>{user.profilePage.comment}</p>
-                                <p className="txt"><span>Interests: </span>{user.profilePage.interest}</p>
+                                <br /><p className="txt"><span>Interests: </span>{user.profilePage.interest}</p><br />
+                                <p className="txt"><span>Discussions: </span>{user.profilePage.discussion}</p><br />
+                                <p className="txt"><span>Comments: </span>{user.profilePage.comment}</p><br />
                             </div>
                         </div>
                     </div><br />

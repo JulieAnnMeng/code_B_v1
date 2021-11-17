@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import UserCard from './UserCard';
 
-function UserPage({user, getUser}) {
+function UserPage({user, getDiscussions, getUser}) {
     const [update, setUpdate] = useState(false);
     
     let userInterests;
@@ -12,47 +12,31 @@ function UserPage({user, getUser}) {
     let discussion;
     let comment;
     let icon;
+    let blankPage = true;
     
     useEffect(() => {
+        getDiscussions();
         getUser();
         setUpdate(false);
     }, [update]);
-
-    function deleteTypeSwitch(type, id) {
-        switch(type) {
-            case 'interest':
-                fetch(`/interests/${id}`, {
-                    method: 'DELETE'
-                })
-                .then(setUpdate(true))
-                .catch(err => console.log(err))
-                break;
-            case 'discussion':
-                fetch(`/discussions/${id}`, {
-                    method: 'DELETE',
-                })
-                .then(setUpdate(true))
-                .catch(err => console.log(err))
-                break;
-            case 'comment':
-                 fetch(`/comments/${id}`, {
-                    method: 'DELETE',
-                })
-                .then(setUpdate(true))
-                .catch(err => console.log(err))
-                break;
-            default:
-                console.log(type)
-                console.log(id)
-                debugger;
-        }
-    }
 
     if (user) {
         userInterests = user.userPage.interests;
         userDiscussions = user.userPage.discussions;
         userComments = user.userPage.userComments;
         let userType = 'user';
+
+        if(user.icon){
+            icon = <Link to='/UserPage' className='icon'><img src={user.icon} alt="usericon" className='icon-img'/></Link>;
+        } else {
+            icon = <Link to={`/ViewUser/${user.id}`} className='icon'>{user.first_name.charAt(0) + user.last_name.charAt(0)}</Link>;
+        }
+
+        if (userInterests === null && userDiscussions === null && userComments === null){
+            blankPage = true;
+        } else if (userInterests.length === 0 && userDiscussions.length === 0 && userComments.length === 0){
+            blankPage = true;
+        } else {blankPage = false}
 
         interested = userInterests.map(interest => {
             let type = "interest";
@@ -70,8 +54,8 @@ function UserPage({user, getUser}) {
                         deleteTypeSwitch={deleteTypeSwitch}
                         setUpdate={setUpdate}
                     />
-            )
-        }        
+                )
+            }      
     })
         discussion = userDiscussions.map(discussion => {
             let type = "discussion";
@@ -110,41 +94,72 @@ function UserPage({user, getUser}) {
                     />
                 )
             }
-        })
-    }
-
-    if (user){
-        if(user.icon){
-            icon = <Link to='/UserPage' className='icon'><img src={user.icon} alt="usericon" className='icon-img'/></Link>;
-        } else {
-            icon = <Link to={`/ViewUser/${user.id}`} className='icon'>{user.first_name.charAt(0) + user.last_name.charAt(0)}</Link>;
-        }
+        })  
     } else {getUser()}
+
+    function deleteTypeSwitch(type, id) {
+        switch(type) {
+            case 'interest':
+                fetch(`/interests/${id}`, {
+                    method: 'DELETE'
+                })
+                .then(setUpdate(true))
+                .catch(err => console.log(err))
+                break;
+            case 'discussion':
+                fetch(`/discussions/${id}`, {
+                    method: 'DELETE',
+                })
+                .then(setUpdate(true))
+                .catch(err => console.log(err))
+                break;
+            case 'comment':
+                 fetch(`/comments/${id}`, {
+                    method: 'DELETE',
+                })
+                .then(setUpdate(true))
+                .catch(err => console.log(err))
+                break;
+            default:
+                console.log(type)
+                console.log(id)
+                debugger;
+        }
+    }
 
     return (
         <div>
-            {user ?  <>
-            <h1 className='welcome'><br />
-                    {icon} 
-                    <em className="welcome-2">Welcome {user.first_name + ' ' + user.last_name}</em> 
-                <Link to={`/DiscussionForm`} className="btn bttn discus-bttn">
-                    <br />Start a discussion<br />
-                </Link>
-            </h1>
-                <div className="container" style={{display: interested[0] ? "block" : "none"}}>
-                    <h2 className='board'>Interested Discussions</h2>
-                    {interested}
-                </div>
-                &nbsp;
-                <div className="container" style={{display: discussion[0] ? "block" : "none"}}>
-                    <h2 className='board'>Started Discussions</h2>
-                    {discussion}
-                </div>
-                &nbsp;
-                <div className="container" style={{display: comment[0] ? "block" : "none"}}>
-                    <h2 className='board'>Comments</h2>
-                    {comment}
-                </div>
+            {user ?  
+            <>
+                <h1 className='welcome'><br />
+                        {icon} 
+                        <em className="welcome-2">Welcome {user.first_name + ' ' + user.last_name}</em> 
+                    <Link to={`/DiscussionForm`} className="btn bttn discus-bttn">
+                        <br />Start a discussion<br />
+                    </Link>
+                </h1><br />
+                {blankPage ?
+                    <div className="container card" ><br /><br />
+                        <h2>There is nothing here. Start participating to add to this page</h2><br /><br />
+                    </div>
+                :
+                    <>
+                        <div className="container" style={{display: interested[0] ? "block" : "none"}}>
+                            <h2 className='board'>Interested Discussions</h2>
+                            {interested}
+                        </div>
+                        &nbsp;
+                        <div className="container" style={{display: discussion[0] ? "block" : "none"}}>
+                            <h2 className='board'>Started Discussions</h2>
+                            {discussion}
+                        </div>
+                        &nbsp;
+                        <div className="container" style={{display: comment[0] ? "block" : "none"}}>
+                            <h2 className='board'>Comments</h2>
+                            {comment}
+                        </div>
+                    </>
+                }
             </>
             :
             <div className="spinner-border text-info center container" role="status"><span className="visually-hidden">Loading...</span></div>
